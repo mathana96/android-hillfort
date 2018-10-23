@@ -1,3 +1,10 @@
 <resources>
   <string name="app_name">Hillfort</string>
+
+
+  <!--BUTTONS-->
+  <string name="button_addHillfort">Add Hillfort</string>
+
+  <!--TEXT FIELD HINTS-->
+  <string name="hint_hillfortTitle">Hillfort Title</string>
 </resources>
