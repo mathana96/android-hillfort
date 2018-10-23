@@ -21,13 +21,18 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     btnAdd.setOnClickListener {
       hillfort.title = hillfortTitle.text.toString()
-      if (hillfort.title.isNotEmpty()) {
+      hillfort.description = hillfortDescription.text.toString()
+
+      if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
+
         hillforts.add(hillfort.copy())
         info("Add Button Pressed: $hillfort")
-        hillforts.forEach{ info("add button pressed: ${it.title}")}
+        hillforts.forEach{ info("add button pressed: ${it.title} ${it.description}")}
       }
       else {
-        toast ("Please enter a title")
+
+        val toastTitleDesc: String = getString(R.string.toast_enterTitleandDesc)
+        toast (toastTitleDesc)
       }
     }
 
