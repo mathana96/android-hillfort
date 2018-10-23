@@ -7,12 +7,12 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.mathana.hillfort.R
-import org.mathana.hillfort.R.id.btnAdd
 import org.mathana.hillfort.models.HillfortModel
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   var hillfort = HillfortModel()
+  val hillforts = ArrayList<HillfortModel>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -22,7 +22,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     btnAdd.setOnClickListener {
       hillfort.title = hillfortTitle.text.toString()
       if (hillfort.title.isNotEmpty()) {
+        hillforts.add(hillfort.copy())
         info("Add Button Pressed: $hillfort")
+        hillforts.forEach{ info("add button pressed: ${it.title}")}
       }
       else {
         toast ("Please enter a title")
