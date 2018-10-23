@@ -7,21 +7,25 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.mathana.hillfort.R
+import org.mathana.hillfort.R.id.btnAdd
+import org.mathana.hillfort.models.HillfortModel
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
+
+  var hillfort = HillfortModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort)
     info("Hillfort activity started")
 
-    btnAdd.setOnClickListener() {
-      val placemarkTitle = placemarkTitle.text.toString()
-      if (placemarkTitle.isNotEmpty()) {
-        info("add Button Pressed: $placemarkTitle")
+    btnAdd.setOnClickListener {
+      hillfort.title = hillfortTitle.text.toString()
+      if (hillfort.title.isNotEmpty()) {
+        info("Add Button Pressed: $hillfort")
       }
       else {
-        toast ("Please Enter a title")
+        toast ("Please enter a title")
       }
     }
 
