@@ -13,12 +13,15 @@ import org.mathana.hillfort.R
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 
+
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   var hillfort = HillfortModel()
   lateinit var app : MainApp
+  var edit = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
+
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort)
     app = application as MainApp
@@ -26,12 +29,24 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
 
+    if (intent.hasExtra("hillfort_edit")) {
+      edit = true
+      hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
+      hillfortTitle.setText(hillfort.title)
+      hillfortDescription.setText(hillfort.description)
+
+    }
+
     btnAdd.setOnClickListener {
       hillfort.title = hillfortTitle.text.toString()
       hillfort.description = hillfortDescription.text.toString()
 
       if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
-        app.hillforts.create(hillfort.copy())
+        if (edit) {
+          app.hillforts.update(hillfort.copy())
+        } else {
+          app.hillforts.create(hillfort.copy())
+        }
         info("add button pressed: ${hillfort.title} ${hillfort.description}")
         setResult(AppCompatActivity.RESULT_OK)
         finish()
