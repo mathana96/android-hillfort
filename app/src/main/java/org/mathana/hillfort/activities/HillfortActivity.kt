@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -30,9 +31,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfort.description = hillfortDescription.text.toString()
 
       if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
-        app.hillforts.add(hillfort.copy())
-        info("Add Button Pressed: $hillfort")
-        app.hillforts.forEach{ info("add button pressed: ${it.title} ${it.description}")}
+        app.hillforts.create(hillfort.copy())
+        info("add button pressed: ${hillfort.title} ${hillfort.description}")
         setResult(AppCompatActivity.RESULT_OK)
         finish()
       }
