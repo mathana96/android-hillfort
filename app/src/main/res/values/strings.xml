@@ -4,6 +4,8 @@
 
   <!--BUTTONS-->
   <string name="button_addHillfort">Add Hillfort</string>
+  <string name="menu_addHillfort">Add</string>
+  <string name="menu_cancelHillfort">Cancel</string>
 
   <!--TEXT FIELD HINTS-->
   <string name="hint_hillfortTitle">Hillfort Title</string>

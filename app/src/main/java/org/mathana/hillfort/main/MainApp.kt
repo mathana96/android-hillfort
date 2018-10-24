@@ -13,8 +13,6 @@ class MainApp : Application(), AnkoLogger {
     super.onCreate()
     info("Hillfort started")
     hillforts.add(HillfortModel("title", "desc"))
-    hillforts.add(HillfortModel("title1", "desc1"))
-    hillforts.add(HillfortModel("title2", "desc2"))
 
   }
 }
