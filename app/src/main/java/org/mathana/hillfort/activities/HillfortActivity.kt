@@ -7,9 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.helpers.readImage
@@ -17,11 +15,13 @@ import org.mathana.hillfort.helpers.readImageFromPath
 import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
+import org.mathana.hillfort.models.Location
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   val IMAGE_REQUEST = 1
+  val LOCATION_REQUEST = 2
 
   var hillfort = HillfortModel()
   lateinit var app : MainApp
@@ -72,6 +72,17 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       showImagePicker(this, IMAGE_REQUEST)
     }
 
+    hillfortLocation.setOnClickListener {
+      info ("Set Location Pressed")
+      val location = Location(52.245696, -7.139102, 15f)
+      if (hillfort.zoom != 0f) {
+        location.lat =  hillfort.lat
+        location.lng = hillfort.lng
+        location.zoom = hillfort.zoom
+      }
+      startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+    }
+
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -96,6 +107,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
           hillfort.image = data.getData().toString()
           hillfortImage.setImageBitmap(readImage(this, resultCode, data))
           chooseImage.setText(R.string.button_changeImage)
+        }
+      }
+      LOCATION_REQUEST -> {
+        if (data != null) {
+          val location = data.extras.getParcelable<Location>("location")
+          hillfort.lat = location.lat
+          hillfort.lng = location.lng
+          hillfort.zoom = location.zoom
         }
       }
     }
