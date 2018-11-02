@@ -13,6 +13,7 @@ import org.jetbrains.anko.toast
 import org.mathana.hillfort.R
 import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.helpers.readImage
+import org.mathana.hillfort.helpers.readImageFromPath
 import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
@@ -40,7 +41,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
-
+      btnAdd.setText(R.string.button_saveHillfort)
+      chooseImage.setText(R.string.button_changeImage)
+      hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
     }
 
     btnAdd.setOnClickListener {
