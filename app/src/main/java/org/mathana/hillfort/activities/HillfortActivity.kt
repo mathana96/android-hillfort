@@ -1,5 +1,6 @@
 package org.mathana.hillfort.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -10,11 +11,17 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.mathana.hillfort.R
+import org.mathana.hillfort.R.id.*
+import org.mathana.hillfort.helpers.readImage
+import org.mathana.hillfort.helpers.readImageFromPath
+import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
+
+  val IMAGE_REQUEST = 1
 
   var hillfort = HillfortModel()
   lateinit var app : MainApp
@@ -34,7 +41,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
-
+      btnAdd.setText(R.string.button_saveHillfort)
+      if (hillfort.image != null)
+        chooseImage.setText(R.string.button_changeImage)
+      hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
     }
 
     btnAdd.setOnClickListener {
@@ -57,6 +67,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       }
     }
 
+    chooseImage.setOnClickListener {
+      info ("Select image")
+      showImagePicker(this, IMAGE_REQUEST)
+    }
+
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -71,5 +86,18 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       }
     }
     return super.onOptionsItemSelected(item)
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    when (requestCode) {
+      IMAGE_REQUEST -> {
+        if (data != null) {
+          hillfort.image = data.getData().toString()
+          hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+          chooseImage.setText(R.string.button_changeImage)
+        }
+      }
+    }
   }
 }
