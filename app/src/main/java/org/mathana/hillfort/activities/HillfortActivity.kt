@@ -10,11 +10,15 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.mathana.hillfort.R
+import org.mathana.hillfort.R.id.*
+import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
+
+  val IMAGE_REQUEST = 1
 
   var hillfort = HillfortModel()
   lateinit var app : MainApp
@@ -55,6 +59,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         val toastTitleDesc: String = getString(R.string.toast_enterTitleandDesc)
         toast (toastTitleDesc)
       }
+    }
+
+    chooseImage.setOnClickListener {
+      info ("Select image")
+      showImagePicker(this, IMAGE_REQUEST)
     }
 
   }
