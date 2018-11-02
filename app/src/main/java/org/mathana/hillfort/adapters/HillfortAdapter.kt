@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.R
@@ -31,8 +32,16 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
     fun bind(hillfort: HillfortModel, listener: HillfortListener) {
       itemView.hillfortTitle.text = hillfort.title
       itemView.description.text = hillfort.description
-      itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
+//      itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
       itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
+
+      if (hillfort.image.isNotEmpty()) {
+        Picasso.get()
+            .load(hillfort.image)
+            .resize(750, 750)
+            .centerCrop()
+            .into(itemView.imageIcon)
+      }
     }
   }
 }

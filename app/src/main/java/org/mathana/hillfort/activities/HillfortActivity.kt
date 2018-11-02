@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.*
@@ -44,7 +45,15 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       btnAdd.setText(R.string.button_saveHillfort)
       if (hillfort.image != null)
         chooseImage.setText(R.string.button_changeImage)
-      hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+
+//      hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+      if (hillfort.image.isNotEmpty()) {
+        Picasso.get()
+            .load(hillfort.image)
+            .resize(750, 750)
+            .centerCrop()
+            .into(hillfortImage)
+      }
     }
 
     btnAdd.setOnClickListener {

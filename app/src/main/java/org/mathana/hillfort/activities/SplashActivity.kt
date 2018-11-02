@@ -17,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
       val intent = Intent(applicationContext, HillfortListActivity::class.java)
       startActivity(intent)
+      setResult(AppCompatActivity.RESULT_OK)
       finish()
     }
   }
