@@ -5,6 +5,7 @@
   <!--BUTTONS-->
   <string name="button_addHillfort">Add Hillfort</string>
   <string name="button_saveHillfort">Save Hillfort</string>
+  <string name="button_deleteHillfort">Delete Hillfort</string>
   <string name="button_addImage"> Add Image </string>
   <string name="button_changeImage"> Change Image </string>
   <string name="button_location">Set Location</string>
