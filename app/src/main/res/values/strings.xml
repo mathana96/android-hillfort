@@ -7,6 +7,7 @@
   <string name="button_saveHillfort">Save Hillfort</string>
   <string name="button_addImage"> Add Image </string>
   <string name="button_changeImage"> Change Image </string>
+  <string name="button_location">Set Location</string>
   <string name="menu_addHillfort">Add</string>
   <string name="menu_cancelHillfort">Cancel</string>
 
@@ -17,4 +18,5 @@
   <!--TOAST TEXT-->
   <string name="toast_enterTitleandDesc">Please enter a title and description</string>
   <string name="select_hillfort_image">Select hillfort image</string>
+  <string name="title_activity_maps">Map</string>
 </resources>

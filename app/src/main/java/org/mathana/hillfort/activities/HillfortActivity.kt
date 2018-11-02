@@ -7,9 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.helpers.readImage
@@ -70,6 +68,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     chooseImage.setOnClickListener {
       info ("Select image")
       showImagePicker(this, IMAGE_REQUEST)
+    }
+
+    hillfortLocation.setOnClickListener {
+      info ("Set Location Pressed")
+      startActivity(intentFor<MapsActivity>())
     }
 
   }
