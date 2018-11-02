@@ -83,6 +83,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
+    btnDelete.setOnClickListener {
+      app.hillforts.delete(hillfort.copy())
+      setResult(AppCompatActivity.RESULT_OK)
+      finish()
+    }
+
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -10,6 +10,9 @@ internal fun getId(): Long {
 }
 
 class HillfortMemStore : HillfortStore, AnkoLogger {
+  override fun delete(hillfort: HillfortModel) {
+    hillforts.remove(hillfort)
+  }
 
   val hillforts = ArrayList<HillfortModel>()
 
