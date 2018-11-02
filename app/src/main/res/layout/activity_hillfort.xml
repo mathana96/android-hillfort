@@ -89,16 +89,10 @@
           android:textColor="@color/colorPrimary"
           android:textSize="16sp"/>
 
-        <ImageView
-          android:id="@+id/hillfortImage"
+        <ListView
+          android:id="@+id/hillfortImages"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:srcCompat="@mipmap/ic_launcher"/>
-
-        <!--<android.support.v7.widget.RecyclerView-->
-          <!--android:id="@+id/hillfortImages"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="match_parent"/>-->
+          android:layout_height="253dp" />
 
         <Button
           android:id="@+id/btnAdd"
@@ -127,6 +121,7 @@
           android:textSize="16sp"/>
 
       </LinearLayout>
+
     </ScrollView>
 
   </RelativeLayout>
