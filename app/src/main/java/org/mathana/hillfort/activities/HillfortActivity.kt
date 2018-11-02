@@ -15,6 +15,7 @@ import org.mathana.hillfort.helpers.readImageFromPath
 import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
+import org.mathana.hillfort.models.Location
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -72,7 +73,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     hillfortLocation.setOnClickListener {
       info ("Set Location Pressed")
-      startActivity(intentFor<MapsActivity>())
+      val location = Location(52.245696, -7.139102, 15f)
+      startActivity(intentFor<MapsActivity>().putExtra("location", location))
     }
 
   }
