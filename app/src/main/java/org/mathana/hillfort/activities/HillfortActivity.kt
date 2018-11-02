@@ -21,6 +21,8 @@ import org.mathana.hillfort.models.Location
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   val IMAGE_REQUEST = 1
+  val LOCATION_REQUEST = 2
+  var location = Location(52.245696, -7.139102, 15f)
 
   var hillfort = HillfortModel()
   lateinit var app : MainApp
@@ -73,8 +75,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     hillfortLocation.setOnClickListener {
       info ("Set Location Pressed")
-      val location = Location(52.245696, -7.139102, 15f)
-      startActivity(intentFor<MapsActivity>().putExtra("location", location))
+//      val location = Location(52.245696, -7.139102, 15f)
+      startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
   }
@@ -101,6 +103,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
           hillfort.image = data.getData().toString()
           hillfortImage.setImageBitmap(readImage(this, resultCode, data))
           chooseImage.setText(R.string.button_changeImage)
+        }
+      }
+      LOCATION_REQUEST -> {
+        if (data != null) {
+          location = data.extras.getParcelable<Location>("location")
         }
       }
     }
