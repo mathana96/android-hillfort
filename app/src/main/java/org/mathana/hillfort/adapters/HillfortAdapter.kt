@@ -35,9 +35,9 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
 //      itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
       itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
 
-      if (hillfort.image.isNotEmpty()) {
+      if (hillfort.images.isNotEmpty()) {
         Picasso.get()
-            .load(hillfort.image)
+            .load(hillfort.images[0])
             .resize(750, 750)
             .centerCrop()
             .into(itemView.imageIcon)
