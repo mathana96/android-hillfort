@@ -12,6 +12,9 @@
   <string name="menu_addHillfort">Add</string>
   <string name="menu_cancelHillfort">Cancel</string>
 
+  <!--CHECKBOX-->
+  <string name="checkbox_explored">Explored!</string>
+
   <!--TEXT FIELD HINTS-->
   <string name="hint_hillfortTitle">Hillfort Title</string>
   <string name="hint_hillfortDescription">Hillfort Description</string>

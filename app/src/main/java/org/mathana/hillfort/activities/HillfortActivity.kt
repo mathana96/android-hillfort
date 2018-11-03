@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.CheckBox
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
@@ -49,11 +51,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         chooseImage.setText(R.string.button_changeImage)
 
       hillfortImages.adapter = ImageAdapter(this, hillfort.images)
+      checkBox.isChecked = hillfort.explored
     }
 
     btnAdd.setOnClickListener {
       hillfort.title = hillfortTitle.text.toString()
       hillfort.description = hillfortDescription.text.toString()
+      hillfort.explored = checkBox.isChecked
 
       if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
         if (edit) {
@@ -114,7 +118,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     when (requestCode) {
       IMAGE_REQUEST -> {
         if (data != null) {
-          hillfort.images.add(data.getData().toString())
+          hillfort.images.add(data.data.toString())
           hillfortImages.adapter = ImageAdapter(this, hillfort.images)
           chooseImage.setText(R.string.button_changeImage)
         }
@@ -125,6 +129,17 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
           hillfort.lat = location.lat
           hillfort.lng = location.lng
           hillfort.zoom = location.zoom
+        }
+      }
+    }
+  }
+
+  fun onCheckboxClicked(view: View) {
+    if (view is CheckBox) {
+      when (view.id) {
+        R.id.checkBox -> {
+          info ("YO YO YO $hillfort")
+          hillfort.explored = checkBox.isChecked
         }
       }
     }
