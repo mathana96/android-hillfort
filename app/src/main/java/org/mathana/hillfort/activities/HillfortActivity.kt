@@ -3,15 +3,17 @@ package org.mathana.hillfort.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.R.id.*
-import org.mathana.hillfort.helpers.readImage
-import org.mathana.hillfort.helpers.readImageFromPath
+import org.mathana.hillfort.adapters.ImageAdapter
 import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
@@ -35,6 +37,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     if (intent.hasExtra("hillfort_edit")) {
       edit = true
@@ -42,9 +45,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
       btnAdd.setText(R.string.button_saveHillfort)
-      if (hillfort.image != null)
+      if (hillfort.images != null)
         chooseImage.setText(R.string.button_changeImage)
-      hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+
+      hillfortImages.adapter = ImageAdapter(this, hillfort.images)
     }
 
     btnAdd.setOnClickListener {
@@ -110,8 +114,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     when (requestCode) {
       IMAGE_REQUEST -> {
         if (data != null) {
-          hillfort.image = data.getData().toString()
-          hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+          hillfort.images.add(data.getData().toString())
+          hillfortImages.adapter = ImageAdapter(this, hillfort.images)
           chooseImage.setText(R.string.button_changeImage)
         }
       }
@@ -125,4 +129,5 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       }
     }
   }
+
 }
