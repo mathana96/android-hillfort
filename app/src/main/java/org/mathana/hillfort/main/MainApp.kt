@@ -18,5 +18,9 @@ class MainApp : Application(), AnkoLogger {
     users = UserJSONStore(applicationContext)
     info("User started")
 
+    users.create(UserModel(1, "abba", "cool"))
+    users.create(UserModel(2, "babba", "cool"))
+    users.create(UserModel(3, "cabba", "cool"))
+
   }
 }

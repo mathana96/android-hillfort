@@ -21,6 +21,7 @@ fun generateRandomIdUser(): Long {
 class UserJSONStore : UserStore, AnkoLogger {
 
   val context: Context
+//  var users = mutableListOf<UserModel>()
   var users = mutableListOf<UserModel>()
 
   constructor (context: Context) {
