@@ -22,8 +22,8 @@ import org.mathana.hillfort.R
 
 
 
-class ImageAdapter(private val context: Context,
-                   private val images: ArrayList<String>) : BaseAdapter() {
+class ImageAdapter(private val images: ArrayList<String>,
+                   private val context: Context) : BaseAdapter() {
 
   private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -39,7 +39,9 @@ class ImageAdapter(private val context: Context,
   override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
     val rowView = inflater.inflate(R.layout.hillfort_image, parent, false)
     val image = rowView.findViewById(R.id.hillfortImage) as ImageView
-    Picasso.get().load(images[position]).placeholder(R.mipmap.ic_launcher).into(image)
+
+    val getImage = getItem(position) as String
+    Picasso.get().load(getImage).placeholder(R.mipmap.ic_launcher).into(image)
     return rowView
   }
 }
