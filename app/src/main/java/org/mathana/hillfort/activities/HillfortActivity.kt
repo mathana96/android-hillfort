@@ -3,6 +3,7 @@ package org.mathana.hillfort.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.NavUtils
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
@@ -118,6 +119,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     when (item?.itemId) {
       R.id.item_cancel -> {
         finish()
+      }
+      android.R.id.home -> { //https://stackoverflow.com/a/32401235/8083587
+        finish()
+        return true
       }
     }
     return super.onOptionsItemSelected(item)
