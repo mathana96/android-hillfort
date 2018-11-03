@@ -30,19 +30,27 @@ class LoginActivity: AppCompatActivity(), AnkoLogger {
       val username = login_username.text.toString()
       val password = login_password.text.toString()
 
-      val allUsers: List<UserModel> = app.users.findAll()
+      if (username.isNotEmpty() && password.isNotEmpty()) {
+        val allUsers: List<UserModel> = app.users.findAll()
 
-      var foundUser: UserModel? = allUsers.find { user -> user.username == username && user.password == password }
+        var foundUser: UserModel? = allUsers.find { user -> user.username == username && user.password == password }
 
-      if (foundUser != null) {
-        startActivity<HillfortListActivity>()
-        info ("WOOP $foundUser")
+        if (foundUser != null) {
+          startActivity<HillfortListActivity>()
+          info ("Login worked! $foundUser")
+        } else {
+          toast("Incorrect username or password")
+        }
+
       } else {
-        toast("Incorrect username or password")
+        toast("Please enter both username and password")
       }
 
-//      info ("WOOP $allUsers")
+    }
 
+    btn_goto_signup.setOnClickListener {
+      info ("Clicked goto signup")
+      startActivity<SignupActivity>()
     }
 
   }

@@ -19,6 +19,9 @@
     <activity android:name=".activities.LoginActivity"
       android:windowSoftInputMode="stateHidden">
     </activity>
+    <activity android:name=".activities.SignupActivity"
+      android:windowSoftInputMode="stateHidden">
+    </activity>
     <activity android:name=".activities.HillfortListActivity"></activity>
     <activity android:name=".activities.SplashActivity">
       <intent-filter>
