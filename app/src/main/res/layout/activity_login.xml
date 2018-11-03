@@ -13,8 +13,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="52dp"
     android:text="Login"
-    android:textSize="50dp"
     android:textColor="@color/colorPrimary"
+    android:textSize="50dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
@@ -38,12 +38,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="1dp"
-    android:layout_marginTop="33dp"
+    android:layout_marginTop="12dp"
     android:ems="10"
     android:hint="@string/hint_password"
     android:inputType="textPassword"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintHorizontal_bias="0.505"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/login_username" />
 
@@ -52,9 +52,10 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
+    android:layout_marginBottom="106dp"
     android:layout_marginEnd="16dp"
     android:layout_marginStart="16dp"
-    android:layout_marginTop="29dp"
+    android:layout_marginTop="109dp"
     android:background="@color/colorPrimaryDark"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
@@ -62,7 +63,9 @@
     android:text="@string/button_login"
     android:textColor="@color/colorPrimary"
     android:textSize="16sp"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
@@ -73,7 +76,7 @@
     android:layout_margin="16dp"
     android:layout_marginEnd="16dp"
     android:layout_marginStart="16dp"
-    android:layout_marginTop="31dp"
+    android:layout_marginTop="32dp"
     android:background="@color/colorPrimaryDark"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
@@ -82,6 +85,7 @@
     android:textColor="@color/colorPrimary"
     android:textSize="16sp"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
