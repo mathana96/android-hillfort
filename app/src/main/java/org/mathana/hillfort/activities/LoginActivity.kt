@@ -8,6 +8,7 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.mathana.hillfort.R
+import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.UserModel
