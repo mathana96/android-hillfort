@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
+import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.adapters.ImageAdapter
 import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
@@ -34,10 +35,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     setContentView(R.layout.activity_hillfort)
     app = application as MainApp
 
-
-
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     if (intent.hasExtra("hillfort_edit")) {
       edit = true

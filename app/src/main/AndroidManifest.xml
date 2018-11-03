@@ -13,7 +13,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity android:name=".activities.HillfortActivity"
-              android:windowSoftInputMode="stateHidden">
+              android:windowSoftInputMode="stateHidden"
+              android:parentActivityName=".activities.HillfortListActivity">
     </activity>
     <activity android:name=".activities.HillfortListActivity"></activity>
     <activity android:name=".activities.SplashActivity">
