@@ -28,7 +28,9 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
 
     btn_logout.setOnClickListener {
       info ("Logout button clicked")
-//      startActivity<LoginActivity>()
+      finishAffinity(); //https://stackoverflow.com/a/9580057/8083587
+      startActivity<LoginActivity>()
+      finish()
     }
 
     btn_save_settings.setOnClickListener {

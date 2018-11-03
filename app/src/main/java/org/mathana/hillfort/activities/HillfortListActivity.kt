@@ -20,6 +20,7 @@ import org.mathana.hillfort.adapters.HillfortAdapter
 import org.mathana.hillfort.adapters.HillfortListener
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
+import org.mathana.hillfort.models.UserModel
 
 class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
 
@@ -32,7 +33,13 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
-    loadHillforts()
+
+    if (intent.hasExtra("current_user")) {
+      val current_user = intent.extras.getParcelable<UserModel>("current_user")
+      info("This is the logged in user: $current_user")
+      loadHillforts()
+    }
+
 
     toolbarMain.title = title
     setSupportActionBar(toolbarMain)
