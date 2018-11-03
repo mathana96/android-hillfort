@@ -20,6 +20,9 @@
       android:windowSoftInputMode="stateHidden">
     </activity>
     <activity android:name=".activities.SignupActivity"
+    android:windowSoftInputMode="stateHidden">
+  </activity>
+    <activity android:name=".activities.SettingsActivity"
       android:windowSoftInputMode="stateHidden">
     </activity>
     <activity android:name=".activities.HillfortListActivity"></activity>
