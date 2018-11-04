@@ -32,6 +32,7 @@ class LoginActivity: AppCompatActivity(), AnkoLogger {
         var foundUser: UserModel? = allUsers.find { user -> user.username == username && user.password == password }
 
         if (foundUser != null) {
+          toast("Welcome ${foundUser.username}!")
           startActivityForResult(intentFor<HillfortListActivity>().putExtra("current_user", foundUser), 0)
           finish()
           info ("Login worked! $foundUser")
