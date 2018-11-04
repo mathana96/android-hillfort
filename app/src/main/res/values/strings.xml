@@ -35,6 +35,7 @@
   <string name="hint_username">Enter username</string>
   <string name="hint_password">Enter password</string>
   <string name="hint_date">Date of exploration :)</string>
+  <string name="hint_notes">Jot your thoughts here :)</string>
 
   <!--TOAST TEXT-->
   <string name="toast_enterTitleandDesc">Please enter a title and description</string>

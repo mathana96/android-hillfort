@@ -68,8 +68,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
       dateExplored.setText(hillfort.date)
+      addNotes.setText(hillfort.notes)
+
       btnAdd.setText(R.string.button_saveHillfort)
-      
+
       if (hillfort.images.isNotEmpty())
         chooseImage.setText(R.string.button_changeImage)
 
@@ -82,6 +84,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     btnAdd.setOnClickListener {
       hillfort.title = hillfortTitle.text.toString()
       hillfort.description = hillfortDescription.text.toString()
+      hillfort.notes = addNotes.text.toString()
 
 
       if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {

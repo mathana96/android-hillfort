@@ -84,6 +84,7 @@ class UserJSONStore : UserStore, AnkoLogger {
       foundhillfort.zoom = hillfort.zoom
       foundhillfort.explored = hillfort.explored
       foundhillfort.date = hillfort.date
+      foundhillfort.notes = hillfort.notes
     }
     serialize()
   }
