@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
+import org.mathana.hillfort.R.id.settings_username
 
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.UserModel
@@ -33,6 +34,8 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
       current_user = intent.extras.getParcelable<UserModel>("current_user")
       settings_username.setText(current_user.username)
       settings_password.setText(current_user.password)
+      total_hillforts.setText(getTotalHillforts(current_user))
+      hillforts_visited.setText(getHillfortsVisited(current_user))
       info("This is the logged in user: $current_user")
 
     }
@@ -79,6 +82,22 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
       }
     }
     return super.onOptionsItemSelected(item)
+  }
+
+  fun getTotalHillforts(user: UserModel) : String {
+    val foundUser: UserModel? = app.users.findAllUsers().find { u -> u.id == user.id }
+    return foundUser!!.hillforts.size.toString()
+  }
+
+  fun getHillfortsVisited(user: UserModel) : String {
+    val foundUser: UserModel? = app.users.findAllUsers().find { u -> u.id == user.id }
+    var count = 0
+    for (hillfort in foundUser!!.hillforts) {
+      if (hillfort.explored == true)
+        count ++
+    }
+    info("COUNT: $count")
+    return count.toString()
   }
 
 }
