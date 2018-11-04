@@ -4,62 +4,96 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/colorAccent">
-
+  android:background="@color/colorPrimary">
 
   <TextView
-    android:id="@+id/textView2"
+    android:id="@+id/textView3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="52dp"
-    android:text="@string/title_settings"
-    android:textColor="@color/colorPrimary"
-    android:textSize="50dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="104dp"
+    android:text="@string/title_username"
+    android:textSize="16sp"
+    android:textStyle="bold"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:fitsSystemWindows="true"
+    app:elevation="0dip"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_chainStyle="spread_inside"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbarSettings"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:title="@string/title_settings"
+      app:titleTextColor="@color/colorPrimary" />
+  </android.support.design.widget.AppBarLayout>
+
+
   <EditText
-    android:id="@+id/login_username"
+    android:id="@+id/settings_username"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="196dp"
-    android:background="@color/colorPrimary"
+    android:layout_marginBottom="36dp"
+    android:backgroundTint="@android:color/black"
     android:ems="10"
     android:inputType="textEmailAddress"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.704"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintBottom_toTopOf="@+id/settings_password"
+    app:layout_constraintStart_toStartOf="@+id/settings_password" />
 
   <EditText
-    android:id="@+id/login_password"
+    android:id="@+id/settings_password"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="1dp"
-    android:layout_marginTop="16dp"
-    android:background="@color/colorPrimary"
+    android:layout_marginStart="12dp"
+    android:backgroundTint="@android:color/black"
     android:ems="10"
     android:inputType="textPassword"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.708"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/login_username" />
+    app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+    app:layout_constraintStart_toEndOf="@+id/textView4" />
 
   <Button
     android:id="@+id/btn_save_settings"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
-    android:background="@color/colorPrimaryDark"
+    android:layout_marginBottom="17dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginStart="20dp"
+    android:background="@android:color/holo_green_light"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
     android:stateListAnimator="@null"
     android:text="@string/button_settings"
+    android:textColor="@color/colorPrimary"
+    android:textSize="16sp"
+    app:layout_constraintBottom_toTopOf="@+id/btn_delete_account"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+    android:id="@+id/btn_delete_account"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginStart="16dp"
+    android:background="@android:color/holo_red_light"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    android:stateListAnimator="@null"
+    android:text="@string/button_delete_acc"
     android:textColor="@color/colorPrimary"
     android:textSize="16sp"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -68,67 +102,67 @@
     app:layout_constraintStart_toStartOf="parent" />
 
   <TextView
-    android:id="@+id/textView3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:text="@string/title_email"
-    android:textSize="16sp"
-    android:textStyle="bold"
-    app:layout_constraintBaseline_toBaselineOf="@+id/login_username"
-    app:layout_constraintEnd_toStartOf="@+id/login_username"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent" />
-
-  <TextView
     android:id="@+id/textView4"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="28dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="184dp"
     android:text="@string/title_password"
     android:textSize="16sp"
     android:textStyle="bold"
-    app:layout_constraintBaseline_toBaselineOf="@+id/login_password"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/login_password"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toEndOf="@+id/login_password"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/textView5"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="55dp"
+    android:layout_marginTop="40dp"
     android:text="@string/title_total_hillforts"
     android:textSize="20sp"
     android:textStyle="bold"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintHorizontal_bias="0.502"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/login_password" />
+    app:layout_constraintTop_toBottomOf="@+id/settings_password" />
 
   <TextView
     android:id="@+id/textView6"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="45dp"
+    android:layout_marginTop="52dp"
     android:text="@string/title_num_visited"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.502"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+  <TextView
+    android:id="@+id/total_hillforts"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="11dp"
+    android:text="0"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+  <TextView
+    android:id="@+id/hillforts_visited"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="11dp"
+    android:text="0"
     android:textSize="20sp"
     android:textStyle="bold"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-  <Button
-    android:id="@+id/btn_logout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="3dp"
-    android:text="@string/button_logout"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
 </android.support.constraint.ConstraintLayout>

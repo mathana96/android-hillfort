@@ -3,10 +3,7 @@ package org.mathana.hillfort.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.main.MainApp
@@ -32,12 +29,13 @@ class LoginActivity: AppCompatActivity(), AnkoLogger {
       val password = login_password.text.toString()
 
       if (username.isNotEmpty() && password.isNotEmpty()) {
-        val allUsers: List<UserModel> = app.users.findAll()
+        val allUsers: List<UserModel> = app.users.findAllUsers()
 
         var foundUser: UserModel? = allUsers.find { user -> user.username == username && user.password == password }
 
         if (foundUser != null) {
-          startActivity<HillfortListActivity>()
+          startActivityForResult(intentFor<HillfortListActivity>().putExtra("current_user", foundUser), 0)
+          finish()
           info ("Login worked! $foundUser")
         } else {
           toast("Incorrect username or password")
