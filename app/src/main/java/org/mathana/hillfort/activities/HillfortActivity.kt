@@ -3,22 +3,14 @@ package org.mathana.hillfort.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.NavUtils
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.ListView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
-import kotlinx.android.synthetic.main.activity_hillfort_list.*
-import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
-import org.mathana.hillfort.R.id.*
-import org.mathana.hillfort.adapters.HillfortAdapter
 import org.mathana.hillfort.adapters.ImageAdapter
 import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
@@ -26,7 +18,6 @@ import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.Location
 import org.mathana.hillfort.models.UserModel
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -50,7 +41,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     setContentView(R.layout.activity_hillfort)
     app = application as MainApp
 
-    listView = findViewById<ListView>(R.id.hillfortImages)
+    listView = findViewById(R.id.hillfortImages)
     showImages(hillfort)
 
     toolbarAdd.title = title
@@ -75,7 +66,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       if (hillfort.images.isNotEmpty())
         chooseImage.setText(R.string.button_changeImage)
 
-//      hillfortImages.adapter = ImageAdapter(hillfort.images, this)
       showImages(hillfort)
       checkBox.isChecked = hillfort.explored
 
@@ -153,7 +143,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       IMAGE_REQUEST -> {
         if (data != null) {
           hillfort.images.add(data.data.toString())
-//          hillfortImages.adapter = ImageAdapter(this, hillfort.images)
           showImages(hillfort)
           chooseImage.setText(R.string.button_changeImage)
         }

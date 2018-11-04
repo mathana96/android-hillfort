@@ -6,16 +6,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.CheckBox
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
 import org.mathana.hillfort.R
-import org.mathana.hillfort.R.id.info
-import org.mathana.hillfort.R.id.recyclerView
-import org.mathana.hillfort.R.string.checkbox_explored
 import org.mathana.hillfort.adapters.HillfortAdapter
 import org.mathana.hillfort.adapters.HillfortListener
 import org.mathana.hillfort.main.MainApp

@@ -8,7 +8,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.R
-import org.mathana.hillfort.helpers.readImageFromPath
 
 interface HillfortListener {
   fun onHillfortClick(hillfort: HillfortModel)

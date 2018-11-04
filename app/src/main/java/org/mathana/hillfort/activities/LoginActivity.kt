@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
-import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.main.MainApp
-import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.UserModel
 
 class LoginActivity: AppCompatActivity(), AnkoLogger {

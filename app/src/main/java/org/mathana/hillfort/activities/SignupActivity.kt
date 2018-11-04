@@ -2,7 +2,6 @@ package org.mathana.hillfort.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -10,7 +9,6 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.mathana.hillfort.R
 import org.mathana.hillfort.main.MainApp
-import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.UserModel
 
 class SignupActivity: AppCompatActivity(), AnkoLogger {
@@ -50,12 +48,9 @@ class SignupActivity: AppCompatActivity(), AnkoLogger {
           toast("Please enter both username and password")
         }
 
-
       } else {
         toast("Please use a different username")
       }
-
-//      info ("WOOP $allUsers")
 
     }
 

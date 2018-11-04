@@ -8,16 +8,12 @@
 package org.mathana.hillfort.adapters
 
 import android.content.Context
-import android.content.Intent
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.mathana.hillfort.R
 
 
