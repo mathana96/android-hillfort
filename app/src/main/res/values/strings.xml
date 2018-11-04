@@ -17,6 +17,7 @@
   <string name="button_signup">Signup</string>
   <string name="button_settings">Save Settings</string>
   <string name="button_logout">Logout</string>
+  <string name="button_delete_acc">Delete Account</string>
 
   <!--HEADINGS-->
   <string name="title_settings">Settings</string>
