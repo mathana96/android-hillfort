@@ -33,7 +33,7 @@ class SignupActivity: AppCompatActivity(), AnkoLogger {
       val username = signup_username.text.toString()
       val password = signup_password.text.toString()
 
-      val allUsers: List<UserModel> = app.users.findAll()
+      val allUsers: List<UserModel> = app.users.findAllUsers()
 
       var foundUser: UserModel? = allUsers.find { user -> user.username == username }
 
@@ -42,7 +42,7 @@ class SignupActivity: AppCompatActivity(), AnkoLogger {
         newUser.password = password
 
         if (newUser.username.isNotEmpty() && newUser.password.isNotEmpty()) {
-          app.users.create(newUser.copy())
+          app.users.createUser(newUser.copy())
 
           startActivity<LoginActivity>()
           info ("Signup successful $")

@@ -41,7 +41,7 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
       info ("Saved settings clicked")
       current_user.username = settings_username.text.toString()
       current_user.password = settings_password.text.toString()
-      app.users.update(current_user.copy())
+      app.users.updateUser(current_user.copy())
       toast("Details updated")
       startActivityForResult(intentFor<HillfortListActivity>().putExtra("current_user", current_user), 0)
       finish()
@@ -49,7 +49,7 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
 
     btn_delete_account.setOnClickListener {
       info ("Delete button clicked")
-      app.users.delete(current_user.copy())
+      app.users.deleteUser(current_user.copy())
       finishAffinity();
       startActivity<LoginActivity>()
       finish()

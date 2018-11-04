@@ -29,7 +29,7 @@ class LoginActivity: AppCompatActivity(), AnkoLogger {
       val password = login_password.text.toString()
 
       if (username.isNotEmpty() && password.isNotEmpty()) {
-        val allUsers: List<UserModel> = app.users.findAll()
+        val allUsers: List<UserModel> = app.users.findAllUsers()
 
         var foundUser: UserModel? = allUsers.find { user -> user.username == username && user.password == password }
 

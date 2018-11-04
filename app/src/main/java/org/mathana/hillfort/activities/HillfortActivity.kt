@@ -24,6 +24,7 @@ import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.Location
+import org.mathana.hillfort.models.UserModel
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -32,7 +33,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
   val LOCATION_REQUEST = 2
 
   var hillfort = HillfortModel()
+  var current_user = UserModel()
+
   lateinit var app : MainApp
+
   var edit = false
 
   private lateinit var listView : ListView
@@ -50,8 +54,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     setSupportActionBar(toolbarAdd)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    if (intent.hasExtra("hillfort_edit")) {
+    if (intent.hasExtra("current_user")) {
+      current_user = intent.extras.getParcelable<UserModel>("current_user")
+    }
+
+    if (intent.hasExtra("hillfort_edit") && intent.hasExtra("current_user")) {
       edit = true
+      current_user = intent.extras.getParcelable<UserModel>("current_user")
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
@@ -68,13 +77,15 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     btnAdd.setOnClickListener {
       hillfort.title = hillfortTitle.text.toString()
       hillfort.description = hillfortDescription.text.toString()
-      hillfort.explored = checkBox.isChecked
+
 
       if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
         if (edit) {
-          app.hillforts.update(hillfort.copy())
+          app.users.updateHillfort(current_user, hillfort.copy())
+          info("CURRENT USER: $current_user")
         } else {
-          app.hillforts.create(hillfort.copy())
+          app.users.createHillfort(current_user, hillfort.copy())
+
         }
         info("add button pressed: ${hillfort.title} ${hillfort.description}")
         setResult(AppCompatActivity.RESULT_OK)
@@ -103,7 +114,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     }
 
     btnDelete.setOnClickListener {
-      app.hillforts.delete(hillfort.copy())
+      app.users.deleteHillfort(current_user, hillfort.copy())
       setResult(AppCompatActivity.RESULT_OK)
       finish()
     }
@@ -155,7 +166,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       when (view.id) {
         R.id.checkBox -> {
           info ("YO YO YO $hillfort")
-          hillfort.explored = checkBox.isChecked
+          if (checkBox.isChecked) {
+            hillfort.explored = true
+
+          }
+
         }
       }
     }
