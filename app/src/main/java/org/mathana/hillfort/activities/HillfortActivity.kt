@@ -25,6 +25,9 @@ import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.Location
 import org.mathana.hillfort.models.UserModel
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -64,7 +67,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
+      dateExplored.setText(hillfort.date)
       btnAdd.setText(R.string.button_saveHillfort)
+      
       if (hillfort.images.isNotEmpty())
         chooseImage.setText(R.string.button_changeImage)
 
@@ -166,13 +171,19 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       when (view.id) {
         R.id.checkBox -> {
           info ("YO YO YO $hillfort")
+          val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+          val currentDate = sdf.format(Date())
           if (checkBox.isChecked) {
             hillfort.explored = true
+            hillfort.date = currentDate
 
           }
 
-          if (checkBox.isChecked.not())
+          if (checkBox.isChecked.not()) {
             hillfort.explored = false
+            hillfort.date = ""
+          }
+          dateExplored.setText(hillfort.date)
         }
       }
     }

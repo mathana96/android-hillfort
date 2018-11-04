@@ -73,6 +73,16 @@
           android:onClick="onCheckboxClicked"
           android:text="@string/checkbox_explored" />
 
+        <EditText
+          android:id="@+id/dateExplored"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/hint_date"
+          android:ellipsize="start"
+          android:gravity="center_horizontal"
+          android:ems="10"
+          android:inputType="date" />
+
         <Button
           android:id="@+id/hillfortLocation"
           android:layout_width="match_parent"
