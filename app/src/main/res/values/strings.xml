@@ -7,14 +7,33 @@
   <string name="button_saveHillfort">Save Hillfort</string>
   <string name="button_deleteHillfort">Delete Hillfort</string>
   <string name="button_addImage"> Add Image </string>
-  <string name="button_changeImage"> Change Image </string>
+  <string name="button_changeImage"> Add Another Image </string>
   <string name="button_location">Set Location</string>
   <string name="menu_addHillfort">Add</string>
+  <string name="menu_settings">Settings</string>
   <string name="menu_cancelHillfort">Cancel</string>
+
+  <string name="button_login">Login</string>
+  <string name="button_signup">Signup</string>
+  <string name="button_settings">Save Settings</string>
+  <string name="button_logout">Logout</string>
+  <string name="button_delete_acc">Delete Account</string>
+
+  <!--HEADINGS-->
+  <string name="title_settings">Settings</string>
+  <string name="title_username">Username</string>
+  <string name="title_password">Password</string>
+  <string name="title_total_hillforts">Total no. of hillforts</string>
+  <string name="title_num_visited">Hillforts visited</string>
+
+  <!--CHECKBOX-->
+  <string name="checkbox_explored">Explored!</string>
 
   <!--TEXT FIELD HINTS-->
   <string name="hint_hillfortTitle">Hillfort Title</string>
   <string name="hint_hillfortDescription">Hillfort Description</string>
+  <string name="hint_username">Enter username</string>
+  <string name="hint_password">Enter password</string>
 
   <!--TOAST TEXT-->
   <string name="toast_enterTitleandDesc">Please enter a title and description</string>

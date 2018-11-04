@@ -3,9 +3,14 @@ package org.mathana.hillfort.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.NavUtils
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.ListView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
@@ -13,11 +18,13 @@ import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.R.id.*
+import org.mathana.hillfort.adapters.HillfortAdapter
 import org.mathana.hillfort.adapters.ImageAdapter
 import org.mathana.hillfort.helpers.showImagePicker
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.Location
+import org.mathana.hillfort.models.UserModel
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -26,8 +33,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
   val LOCATION_REQUEST = 2
 
   var hillfort = HillfortModel()
+  var current_user = UserModel()
+
   lateinit var app : MainApp
+
   var edit = false
+
+  private lateinit var listView : ListView
 
   override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -35,12 +47,20 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     setContentView(R.layout.activity_hillfort)
     app = application as MainApp
 
+    listView = findViewById<ListView>(R.id.hillfortImages)
+    showImages(hillfort)
+
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    if (intent.hasExtra("hillfort_edit")) {
+    if (intent.hasExtra("current_user")) {
+      current_user = intent.extras.getParcelable<UserModel>("current_user")
+    }
+
+    if (intent.hasExtra("hillfort_edit") && intent.hasExtra("current_user")) {
       edit = true
+      current_user = intent.extras.getParcelable<UserModel>("current_user")
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
@@ -48,18 +68,24 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       if (hillfort.images != null)
         chooseImage.setText(R.string.button_changeImage)
 
-      hillfortImages.adapter = ImageAdapter(this, hillfort.images)
+//      hillfortImages.adapter = ImageAdapter(hillfort.images, this)
+      showImages(hillfort)
+      checkBox.isChecked = hillfort.explored
+
     }
 
     btnAdd.setOnClickListener {
       hillfort.title = hillfortTitle.text.toString()
       hillfort.description = hillfortDescription.text.toString()
 
+
       if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
         if (edit) {
-          app.hillforts.update(hillfort.copy())
+          app.users.updateHillfort(current_user, hillfort.copy())
+          info("CURRENT USER: $current_user")
         } else {
-          app.hillforts.create(hillfort.copy())
+          app.users.createHillfort(current_user, hillfort.copy())
+
         }
         info("add button pressed: ${hillfort.title} ${hillfort.description}")
         setResult(AppCompatActivity.RESULT_OK)
@@ -88,7 +114,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     }
 
     btnDelete.setOnClickListener {
-      app.hillforts.delete(hillfort.copy())
+      app.users.deleteHillfort(current_user, hillfort.copy())
       setResult(AppCompatActivity.RESULT_OK)
       finish()
     }
@@ -105,6 +131,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       R.id.item_cancel -> {
         finish()
       }
+      android.R.id.home -> { //https://stackoverflow.com/a/32401235/8083587
+        finish()
+        return true
+      }
     }
     return super.onOptionsItemSelected(item)
   }
@@ -114,8 +144,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     when (requestCode) {
       IMAGE_REQUEST -> {
         if (data != null) {
-          hillfort.images.add(data.getData().toString())
-          hillfortImages.adapter = ImageAdapter(this, hillfort.images)
+          hillfort.images.add(data.data.toString())
+//          hillfortImages.adapter = ImageAdapter(this, hillfort.images)
+          showImages(hillfort)
           chooseImage.setText(R.string.button_changeImage)
         }
       }
@@ -128,6 +159,27 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
       }
     }
+  }
+
+  fun onCheckboxClicked(view: View) {
+    if (view is CheckBox) {
+      when (view.id) {
+        R.id.checkBox -> {
+          info ("YO YO YO $hillfort")
+          if (checkBox.isChecked) {
+            hillfort.explored = true
+
+          }
+
+        }
+      }
+    }
+  }
+
+
+  fun showImages (hillfort: HillfortModel) {
+    val images: ArrayList<String> = hillfort.images
+    listView.adapter = ImageAdapter(images, this)
   }
 
 }
