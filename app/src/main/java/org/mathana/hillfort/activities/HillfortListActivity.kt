@@ -26,6 +26,8 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
 
   lateinit var app: MainApp
 
+  var current_user = UserModel()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort_list)
@@ -35,7 +37,7 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
     recyclerView.layoutManager = layoutManager
 
     if (intent.hasExtra("current_user")) {
-      val current_user = intent.extras.getParcelable<UserModel>("current_user")
+      current_user = intent.extras.getParcelable<UserModel>("current_user")
       info("This is the logged in user: $current_user")
       loadHillforts()
     }
@@ -53,7 +55,8 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       R.id.item_add -> startActivityForResult<HillfortActivity>(0)
-      R.id.item_settings -> startActivityForResult<SettingsActivity>(0)
+      R.id.item_settings -> startActivityForResult(intentFor<SettingsActivity>().putExtra("current_user", current_user), 0)
+
     }
     return super.onOptionsItemSelected(item)
   }
