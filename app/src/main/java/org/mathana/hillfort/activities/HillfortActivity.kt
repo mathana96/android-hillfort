@@ -65,7 +65,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
       btnAdd.setText(R.string.button_saveHillfort)
-      if (hillfort.images != null)
+      if (hillfort.images.isNotEmpty())
         chooseImage.setText(R.string.button_changeImage)
 
 //      hillfortImages.adapter = ImageAdapter(hillfort.images, this)
@@ -171,6 +171,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
           }
 
+          if (checkBox.isChecked.not())
+            hillfort.explored = false
         }
       }
     }

@@ -88,7 +88,8 @@ class UserJSONStore : UserStore, AnkoLogger {
   }
 
   override fun deleteHillfort(user: UserModel, hillfort: HillfortModel) {
-    user.hillforts.remove(hillfort)
+    var founduser = users.find { u -> u.id == user.id }
+    founduser!!.hillforts.remove(hillfort)
     serialize()
   }
 
