@@ -17,27 +17,24 @@ import org.mathana.hillfort.models.UserModel
 
 class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
 
-  lateinit var app: MainApp
+  lateinit var presenter: HillfortListPresenter
 
   var current_user = UserModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort_list)
-    app = application as MainApp
+    toolbarMain.title = title
+    setSupportActionBar(toolbarMain)
 
+    presenter = HillfortListPresenter(this)
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
 
-    if (intent.hasExtra("current_user")) {
-      current_user = intent.extras.getParcelable<UserModel>("current_user")
-      info("This is the logged in user: $current_user")
-      loadHillforts()
-    }
+    recyclerView.adapter = HillfortAdapter(presenter.getHillforts(), this)
+    recyclerView.adapter?.notifyDataSetChanged()
 
 
-    toolbarMain.title = title
-    setSupportActionBar(toolbarMain)
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,30 +44,22 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.item_add -> startActivityForResult(intentFor<HillfortActivity>().putExtra("current_user", current_user), 0)
-      R.id.item_settings -> startActivityForResult(intentFor<SettingsActivity>().putExtra("current_user", current_user), 0)
-      R.id.item_map -> startActivity<HillfortsMapActivity>()
+      R.id.item_add -> presenter.doAddHillfort()
+      R.id.item_settings -> presenter.doSettings()
+      R.id.item_map -> presenter.doShowHillfortMap()
 
     }
     return super.onOptionsItemSelected(item)
   }
 
   override fun onHillfortClick(hillfort: HillfortModel) {
-    startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort).putExtra("current_user", current_user), 0)
+    presenter.doEditHillfort(hillfort)
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    loadHillforts()
+    recyclerView.adapter?.notifyDataSetChanged()
     super.onActivityResult(requestCode, resultCode, data)
   }
 
-  private fun loadHillforts() {
-    showHillforts(app.users.findAllHillforts(current_user))
-  }
-
-  fun showHillforts (hillforts: List<HillfortModel>) {
-    recyclerView.adapter = HillfortAdapter(hillforts, this)
-    recyclerView.adapter?.notifyDataSetChanged()
-  }
 
 }
