@@ -12,35 +12,46 @@ import org.mathana.hillfort.R
 
 import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
+import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.helpers.readImageFromPath
 import org.mathana.hillfort.main.MainApp
+import org.mathana.hillfort.models.HillfortModel
+import org.mathana.hillfort.views.BaseView
 
-class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
   lateinit var map: GoogleMap
-  lateinit var app: MainApp
+  lateinit var presenter: HillfortsMapPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillforts_map)
     setSupportActionBar(toolbarMaps)
+
+    presenter = HillfortsMapPresenter(this)
+
     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync {
       map = it
-      configureMap()
+      map.setOnMarkerClickListener(this)
+      presenter.loadHillforts()
+
     }
-
-    app = application as MainApp
-
   }
 
-  override fun onMarkerClick(marker: Marker): Boolean {
-    val tag = marker.tag as Long
-    val hillfort = app.users.findById(tag)
+  override fun showHillfort(hillfort: HillfortModel) {
     currentTitle.text = hillfort!!.title
     currentDescription.text = hillfort!!.description
     if (hillfort.images.size > 0)
       imageView.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
+  }
+
+  override fun showHillforts(hillforts: List<HillfortModel>) {
+    presenter.doPopulateMap(map, hillforts)
+  }
+
+  override fun onMarkerClick(marker: Marker): Boolean {
+    presenter.doMarkerSelected(marker)
     return true
   }
 
@@ -69,16 +80,4 @@ class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
     mapView.onSaveInstanceState(outState)
   }
 
-  fun configureMap() {
-    map.uiSettings.setZoomControlsEnabled(true)
-    map.setOnMarkerClickListener(this)
-    app.users.findAllUsers().forEach { user ->
-      user.hillforts.forEach {
-        val loc = LatLng(it.lat, it.lng)
-        val options = MarkerOptions().title(it.title).position(loc)
-        map.addMarker(options).tag = it.id
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
-      }
-    }
-  }
 }

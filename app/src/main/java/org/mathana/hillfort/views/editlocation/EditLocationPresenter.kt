@@ -1,4 +1,4 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.editlocation
 
 import android.app.Activity
 import android.content.Intent
@@ -8,20 +8,22 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.mathana.hillfort.models.Location
+import org.mathana.hillfort.views.BasePresenter
+import org.mathana.hillfort.views.BaseView
 
 
-class MapsPresenter(val activity: MapsActivity) {
+class EditLocationPresenter(view: BaseView): BasePresenter(view) {
 
   var location = Location()
 
   init {
-    location = activity.intent.extras.getParcelable<Location>("location")
+    location = view.intent.extras.getParcelable<Location>("location")
   }
 
   fun initMap(map: GoogleMap) {
     val loc = LatLng(location.lat, location.lng)
     val options = MarkerOptions()
-        .title("Placemark")
+        .title("Hillfort")
         .snippet("GPS : " + loc.toString())
         .draggable(true)
         .position(loc)
@@ -38,8 +40,8 @@ class MapsPresenter(val activity: MapsActivity) {
   fun doOnBackPressed() {
     val resultIntent = Intent()
     resultIntent.putExtra("location", location)
-    activity.setResult(Activity.RESULT_OK, resultIntent)
-    activity.finish()
+    view?.setResult(Activity.RESULT_OK, resultIntent)
+    view?.finish()
   }
 
   fun doUpdateMarker(marker: Marker) {

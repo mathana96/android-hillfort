@@ -3,9 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
-    android:visible="false"
-    android:id="@+id/item_delete"
-    android:title="@string/button_deleteHillfort"
+    android:id="@+id/item_save"
+    android:title="@string/button_saveHillfort"
     app:showAsAction="always"/>
 
   <item

@@ -7,6 +7,7 @@ import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.UserModel
+import org.mathana.hillfort.views.hillfortlist.HillfortListView
 
 class LoginActivity: AppCompatActivity(), AnkoLogger {
 
@@ -33,7 +34,7 @@ class LoginActivity: AppCompatActivity(), AnkoLogger {
 
         if (foundUser != null) {
           toast("Welcome ${foundUser.username}!")
-          startActivityForResult(intentFor<HillfortListActivity>().putExtra("current_user", foundUser), 0)
+          startActivityForResult(intentFor<HillfortListView>().putExtra("current_user", foundUser), 0)
           finish()
           info ("Login worked! $foundUser")
         } else {

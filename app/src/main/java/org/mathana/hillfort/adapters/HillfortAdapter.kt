@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.mathana.hillfort.models.HillfortModel
@@ -33,13 +34,16 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
       itemView.description.text = hillfort.description
       if (hillfort.explored == true)
         itemView.explored.text = "Explored!"
+      else
+        itemView.explored.text = ""
 
       itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
 
-      if (hillfort.images.isNotEmpty()) {
+      if (hillfort.images.size > 0) {
         Picasso.get()
             .load(hillfort.images[0])
             .resize(750, 750)
+            .memoryPolicy(MemoryPolicy.NO_CACHE)
             .centerCrop()
             .into(itemView.imageIcon)
       }

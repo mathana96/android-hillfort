@@ -1,7 +1,6 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.hillfortlist
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -11,30 +10,33 @@ import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.adapters.HillfortAdapter
 import org.mathana.hillfort.adapters.HillfortListener
-import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
-import org.mathana.hillfort.models.UserModel
+import org.mathana.hillfort.views.BaseView
 
-class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
+
+class HillfortListView: BaseView(), HillfortListener, AnkoLogger {
 
   lateinit var presenter: HillfortListPresenter
 
-  var current_user = UserModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort_list)
-    toolbarMain.title = title
-    setSupportActionBar(toolbarMain)
+    init(toolbarMain)
 
-    presenter = HillfortListPresenter(this)
+    presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
+
+
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
 
-    recyclerView.adapter = HillfortAdapter(presenter.getHillforts(), this)
+    presenter.loadHillforts()
+
+  }
+
+  override fun showHillforts(hillforts: List<HillfortModel>) {
+    recyclerView.adapter = HillfortAdapter(hillforts, this)
     recyclerView.adapter?.notifyDataSetChanged()
-
-
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,7 +59,7 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener, AnkoLogger {
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    recyclerView.adapter?.notifyDataSetChanged()
+    presenter.loadHillforts()
     super.onActivityResult(requestCode, resultCode, data)
   }
 

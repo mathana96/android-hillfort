@@ -1,6 +1,7 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.hillfort
 
 import android.content.Intent
+import android.view.View
 import kotlinx.android.synthetic.main.activity_hillfort.*
 
 import org.jetbrains.anko.intentFor
@@ -9,33 +10,38 @@ import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.Location
 import org.mathana.hillfort.models.UserModel
+import org.mathana.hillfort.views.BasePresenter
+import org.mathana.hillfort.views.IMAGE_REQUEST
+import org.mathana.hillfort.views.LOCATION_REQUEST
+import org.mathana.hillfort.views.editlocation.EditLocationView
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HillfortPresenter(val activity: HillfortActivity) {
+class HillfortPresenter(view: HillfortView): BasePresenter(view) {
 
-  val IMAGE_REQUEST = 1
-  val LOCATION_REQUEST = 2
 
   var hillfort = HillfortModel()
   var current_user = UserModel()
 
-  var app : MainApp
 
   var edit = false
 
 
   init {
-    app = activity.application as MainApp
-    if (activity.intent.hasExtra("current_user")) {
-      current_user = activity.intent.extras.getParcelable<UserModel>("current_user")
+    app = view.application as MainApp
+    if (view.intent.hasExtra("current_user")) {
+      current_user = view.intent.extras.getParcelable<UserModel>("current_user")
+      view.showHillfort(hillfort)
+      view.btnDelete.visibility = View.INVISIBLE
+
     }
-    if (activity.intent.hasExtra("hillfort_edit") && activity.intent.hasExtra("current_user")) {
+    if (view.intent.hasExtra("hillfort_edit") && view.intent.hasExtra("current_user")) {
       edit = true
-      current_user = activity.intent.extras.getParcelable<UserModel>("current_user")
-      hillfort = activity.intent.extras.getParcelable<HillfortModel>("hillfort_edit")
-      activity.showHillfort(hillfort)
+      current_user = view.intent.extras.getParcelable<UserModel>("current_user")
+      hillfort = view.intent.extras.getParcelable<HillfortModel>("hillfort_edit")
+      view.showHillfort(hillfort)
+      view.btnDelete.visibility = View.VISIBLE
     }
 
   }
@@ -50,20 +56,20 @@ class HillfortPresenter(val activity: HillfortActivity) {
     } else {
       app.users.createHillfort(current_user, hillfort)
     }
-    activity.finish()
+    view?.finish()
   }
 
   fun doCancel() {
-    activity.finish()
+    view?.finish()
   }
 
   fun doDelete() {
     app.users.deleteHillfort(current_user, hillfort)
-    activity.finish()
+    view?.finish()
   }
 
   fun doSelectImage() {
-    showImagePicker(activity, IMAGE_REQUEST)
+    showImagePicker(view!!, IMAGE_REQUEST)
   }
 
   fun doSetLocation() {
@@ -73,15 +79,15 @@ class HillfortPresenter(val activity: HillfortActivity) {
       location.lng = hillfort.lng
       location.zoom = hillfort.zoom
     }
-    activity.startActivityForResult(activity.intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+    view?.startActivityForResult(view?.intentFor<EditLocationView>()?.putExtra("location", location), LOCATION_REQUEST)
   }
 
-  fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+  override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
     when (requestCode) {
       IMAGE_REQUEST -> {
         if (data != null) {
           hillfort.images.add(data.data.toString())
-
+          view?.showImages(hillfort)
         }
       }
       LOCATION_REQUEST -> {
@@ -101,11 +107,11 @@ class HillfortPresenter(val activity: HillfortActivity) {
       val currentDate = sdf.format(Date())
       hillfort.explored = true
       hillfort.date = currentDate
-    } else {
+    }
+    if (!checked) {
       hillfort.explored = false
       hillfort.date = ""
     }
-
   }
 
 }

@@ -1,4 +1,4 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.hillfort
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -13,17 +13,13 @@ import org.jetbrains.anko.*
 import org.mathana.hillfort.R
 import org.mathana.hillfort.R.id.*
 import org.mathana.hillfort.adapters.ImageAdapter
-import org.mathana.hillfort.helpers.showImagePicker
-import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
-import org.mathana.hillfort.models.Location
-import org.mathana.hillfort.models.UserModel
-import java.nio.file.Files.delete
+import org.mathana.hillfort.views.BaseView
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HillfortActivity : AppCompatActivity(), AnkoLogger {
+class HillfortView : BaseView(), AnkoLogger {
 
   lateinit var presenter : HillfortPresenter
   var hillfort = HillfortModel()
@@ -35,10 +31,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort)
 
-//    listView = findViewById(R.id.hillfortImages)
-//    showImages(hillfort)
-
-
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -47,17 +39,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     presenter = HillfortPresenter(this)
 
-
-    btnAdd.setOnClickListener {
-      if (hillfortTitle.text.toString().isNotEmpty() && hillfortDescription.text.toString().isNotEmpty()) {
-        presenter.doAddOrSave(hillfortTitle.text.toString(), hillfortDescription.text.toString(), addNotes.text.toString())
-        info("add button pressed: ${hillfort.title} ${hillfort.description}")
-      }
-      else {
-        val toastTitleDesc: String = getString(R.string.toast_enterTitleandDesc)
-        toast (toastTitleDesc)
-      }
-    }
+    btnDelete.setOnClickListener { presenter.doDelete() }
 
     chooseImage.setOnClickListener { presenter.doSelectImage() }
 
@@ -65,33 +47,39 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   }
 
-  fun showHillfort(hillfort: HillfortModel) {
+  override fun showHillfort(hillfort: HillfortModel) {
 
     hillfortTitle.setText(hillfort.title)
     hillfortDescription.setText(hillfort.description)
     dateExplored.setText(hillfort.date)
     addNotes.setText(hillfort.notes)
 
-    btnAdd.setText(R.string.button_saveHillfort)
-
-    if (hillfort.images.isNotEmpty())
+    if (hillfort.images.isNotEmpty()) {
       chooseImage.setText(R.string.button_changeImage)
+      showImages(hillfort)
+    }
 
-    showImages(hillfort)
     checkBox.isChecked = hillfort.explored
 
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_hillfort, menu)
-    if (presenter.edit && menu != null) menu.getItem(0).setVisible(true)
+//    if (presenter.edit && menu != null) menu.getItem(0).setVisible(true)
     return super.onCreateOptionsMenu(menu)
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.item_delete -> {
-        presenter.doDelete()
+      R.id.item_save -> {
+        if (hillfortTitle.text.toString().isNotEmpty() && hillfortDescription.text.toString().isNotEmpty()) {
+          presenter.doAddOrSave(hillfortTitle.text.toString(), hillfortDescription.text.toString(), addNotes.text.toString())
+          info("add button pressed: ${hillfort.title} ${hillfort.description}")
+        }
+        else {
+          val toastTitleDesc: String = getString(R.string.toast_enterTitleandDesc)
+          toast (toastTitleDesc)
+        }
       }
       R.id.item_cancel -> {
         presenter.doCancel()
@@ -117,17 +105,26 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
           val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
           val currentDate = sdf.format(Date())
 
-          presenter.doOnCheckBoxClicked(checkBox.isChecked)
+          if (checkBox.isChecked) {
+            presenter.doOnCheckBoxClicked(true)
+            dateExplored.setText(currentDate)
+          }
+          if (checkBox.isChecked.not()) {
+            presenter.doOnCheckBoxClicked(false)
+            dateExplored.setText("")
+          }
 
-          dateExplored.setText(currentDate)
         }
       }
     }
   }
 
-  fun showImages (hillfort: HillfortModel) {
-    val images: ArrayList<String> = hillfort.images
-    listView.adapter = ImageAdapter(images, this)
+  override fun showImages (hillfort: HillfortModel) {
+    if (hillfort.images.isNotEmpty()) {
+      val images: ArrayList<String> = hillfort.images
+      listView.adapter = ImageAdapter(images, this)
+    }
+
   }
 
 }
