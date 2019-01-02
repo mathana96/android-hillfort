@@ -4,7 +4,7 @@
 
   <!--BUTTONS-->
   <string name="button_addHillfort">Add Hillfort</string>
-  <string name="button_saveHillfort">Save Hillfort</string>
+  <string name="button_saveHillfort">Save</string>
   <string name="button_deleteHillfort">Delete</string>
   <string name="button_addImage"> Add Image </string>
   <string name="button_changeImage"> Add Another Image </string>

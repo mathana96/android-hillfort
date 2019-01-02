@@ -13,7 +13,7 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity
-      android:name=".activities.HillfortActivity"
+      android:name=".views.hillfort.HillfortView"
       android:windowSoftInputMode="stateHidden"></activity>
     <activity
       android:name=".activities.LoginActivity"
@@ -24,7 +24,7 @@
     <activity
       android:name=".activities.SettingsActivity"
       android:windowSoftInputMode="stateHidden"></activity>
-    <activity android:name=".activities.HillfortListActivity" />
+    <activity android:name=".views.hillfortlist.HillfortListView" />
     <activity android:name=".activities.SplashActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -38,10 +38,10 @@
       android:value="@string/google_maps_key" />
 
     <activity
-      android:name=".activities.MapsActivity"
+      android:name=".views.editlocation.EditLocationView"
       android:label="@string/title_activity_maps" />
     <activity
-      android:name=".activities.HillfortsMapActivity"
+      android:name=".activities.HillfortsMapView"
       android:label="@string/title_activity_hillforts_map"></activity>
   </application>
 

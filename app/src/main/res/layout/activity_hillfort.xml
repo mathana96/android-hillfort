@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="org.mathana.hillfort.activities.HillfortActivity">
+  tools:context="org.mathana.hillfort.views.hillfort.HillfortView">
 
   <RelativeLayout
     android:layout_width="match_parent"
@@ -120,15 +120,15 @@
           android:textSize="16sp" />
 
         <Button
-          android:id="@+id/btnAdd"
+          android:id="@+id/btnDelete"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_margin="16dp"
-          android:background="@android:color/holo_green_light"
+          android:background="@android:color/holo_red_dark"
           android:paddingBottom="8dp"
           android:paddingTop="8dp"
           android:stateListAnimator="@null"
-          android:text="@string/button_addHillfort"
+          android:text="@string/button_deleteHillfort"
           android:textColor="@color/colorPrimary"
           android:textSize="16sp" />
 
