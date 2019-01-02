@@ -5,13 +5,14 @@
   <!--BUTTONS-->
   <string name="button_addHillfort">Add Hillfort</string>
   <string name="button_saveHillfort">Save Hillfort</string>
-  <string name="button_deleteHillfort">Delete Hillfort</string>
+  <string name="button_deleteHillfort">Delete</string>
   <string name="button_addImage"> Add Image </string>
   <string name="button_changeImage"> Add Another Image </string>
   <string name="button_location">Set Location</string>
   <string name="menu_addHillfort">Add</string>
   <string name="menu_settings">Settings</string>
   <string name="menu_cancelHillfort">Cancel</string>
+  <string name="menu_map">Map</string>
 
   <string name="button_login">Login</string>
   <string name="button_signup">Signup</string>
@@ -41,4 +42,6 @@
   <string name="toast_enterTitleandDesc">Please enter a title and description</string>
   <string name="select_hillfort_image">Select hillfort image</string>
   <string name="title_activity_maps">Map</string>
+  <string name="title_activity_hillforts_map">Map of all Hillforts</string>
+
 </resources>

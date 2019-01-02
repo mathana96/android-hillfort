@@ -9,4 +9,5 @@ interface UserStore {
   fun createHillfort(user: UserModel, hillfort: HillfortModel)
   fun updateHillfort(user: UserModel, hillfort: HillfortModel)
   fun deleteHillfort(user: UserModel, hillfort: HillfortModel)
+  fun findById( id:Long): HillfortModel?
 }

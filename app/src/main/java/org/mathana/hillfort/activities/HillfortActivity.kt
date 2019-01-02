@@ -17,6 +17,7 @@ import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.Location
 import org.mathana.hillfort.models.UserModel
+import java.nio.file.Files.delete
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -62,6 +63,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       addNotes.setText(hillfort.notes)
 
       btnAdd.setText(R.string.button_saveHillfort)
+
+
 
       if (hillfort.images.isNotEmpty())
         chooseImage.setText(R.string.button_changeImage)
@@ -111,21 +114,27 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
-    btnDelete.setOnClickListener {
-      app.users.deleteHillfort(current_user, hillfort.copy())
-      setResult(AppCompatActivity.RESULT_OK)
-      finish()
-    }
+//    btnDelete.setOnClickListener {
+//      app.users.deleteHillfort(current_user, hillfort.copy())
+//      setResult(AppCompatActivity.RESULT_OK)
+//      finish()
+//    }
 
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_hillfort, menu)
+    if (edit && menu != null) menu.getItem(0).setVisible(true)
     return super.onCreateOptionsMenu(menu)
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
+      R.id.item_delete -> {
+        app.users.deleteHillfort(current_user, hillfort.copy())
+        setResult(AppCompatActivity.RESULT_OK)
+        finish()
+      }
       R.id.item_cancel -> {
         finish()
       }
