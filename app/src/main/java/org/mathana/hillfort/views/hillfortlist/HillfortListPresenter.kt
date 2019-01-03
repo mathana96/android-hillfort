@@ -48,7 +48,7 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view), AnkoLogger {
   }
 
   fun doSearch(query: String) {
-    view?.showHillforts(app.users.findAllHillforts(current_user).filter { h -> h.title.contains(query) })
+      view?.showHillforts(app.users.findAllHillforts(current_user).filter { h -> h.title.contains(query) })
   }
 
 }

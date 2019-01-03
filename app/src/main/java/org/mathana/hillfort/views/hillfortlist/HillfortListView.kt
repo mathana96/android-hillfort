@@ -44,6 +44,8 @@ class HillfortListView: BaseView(), HillfortListener, AnkoLogger {
     hillfortSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
       override fun onQueryTextChange(newText: String): Boolean {
+        if (newText.isEmpty())
+          presenter.loadHillforts()
         return false
       }
 
