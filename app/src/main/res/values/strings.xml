@@ -28,14 +28,14 @@
   <string name="title_num_visited">Hillforts visited</string>
 
   <!--CHECKBOX-->
-  <string name="checkbox_explored">Explored!</string>
+  <string name="checkbox_explored">Explored?</string>
 
   <!--TEXT FIELD HINTS-->
   <string name="hint_hillfortTitle">Hillfort Title</string>
   <string name="hint_hillfortDescription">Hillfort Description</string>
   <string name="hint_username">Enter username</string>
   <string name="hint_password">Enter password</string>
-  <string name="hint_date">Date of exploration :)</string>
+  <string name="hint_date">Date</string>
   <string name="hint_notes">Jot your thoughts here :)</string>
 
   <!--TOAST TEXT-->
