@@ -3,6 +3,7 @@ package org.mathana.hillfort.views.hillfort
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.View
+import android.widget.RatingBar
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
@@ -196,6 +197,11 @@ class HillfortPresenter(view: HillfortView): BasePresenter(view), AnkoLogger {
       hillfort.fav = false
     }
     info("hillfort status: ${hillfort.fav}")
+  }
+
+  fun doRate(ratingBar: RatingBar, rating: Float, fromUser: Boolean) {
+    info("rating: $rating")
+    hillfort.rate = rating
   }
 
 }
