@@ -2,7 +2,7 @@ package org.mathana.hillfort.views.hillfortlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
@@ -27,7 +27,7 @@ class HillfortListView: BaseView(), HillfortListener, AnkoLogger {
     presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
 
-    val layoutManager = LinearLayoutManager(this)
+    val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
 
     presenter.loadHillforts()

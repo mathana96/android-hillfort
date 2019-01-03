@@ -2,8 +2,8 @@ package org.mathana.hillfort.views
 
 import android.content.Intent
 import android.os.Parcelable
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
 import org.mathana.hillfort.activities.HillfortsMapView
 import org.mathana.hillfort.activities.SettingsActivity

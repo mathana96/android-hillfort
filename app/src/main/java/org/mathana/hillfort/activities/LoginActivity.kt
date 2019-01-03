@@ -1,7 +1,7 @@
 package org.mathana.hillfort.activities
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
