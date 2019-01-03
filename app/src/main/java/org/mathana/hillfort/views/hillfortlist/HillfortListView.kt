@@ -37,6 +37,8 @@ class HillfortListView: BaseView(), HillfortListener, AnkoLogger {
 
     switchFav.setOnCheckedChangeListener { buttonView, isChecked -> presenter.doFavSwitch(buttonView, isChecked) }
 
+    btnAdd.setOnClickListener { presenter.doAddHillfort() }
+
   }
 
   override fun showHillforts(hillforts: List<HillfortModel>) {
@@ -51,7 +53,6 @@ class HillfortListView: BaseView(), HillfortListener, AnkoLogger {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.item_add -> presenter.doAddHillfort()
       R.id.item_settings -> presenter.doSettings()
       R.id.item_map -> presenter.doShowHillfortMap()
 

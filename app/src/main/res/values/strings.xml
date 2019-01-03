@@ -49,5 +49,6 @@
   <string name="title_activity_edit_location">Hillfort</string>
 
   <string name="hint_search">Search Hillfort</string>
+  <string name="hint_fav">Favourites</string>
 
 </resources>
