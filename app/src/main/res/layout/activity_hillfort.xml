@@ -270,7 +270,7 @@
     </ScrollView>
 
     <RatingBar
-      android:id="@+id/listitemrating"
+      android:id="@+id/ratingBar"
       android:layout_width="244dp"
       android:layout_height="41dp"
       android:layout_marginStart="40dp"

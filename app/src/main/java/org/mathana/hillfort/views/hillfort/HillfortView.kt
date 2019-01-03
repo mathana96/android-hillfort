@@ -52,7 +52,7 @@ class HillfortView : BaseView(), AnkoLogger {
 
     chooseImage.setOnClickListener { presenter.doSelectImage() }
 
-//    hillfortLocation.setOnClickListener { presenter.doSetLocation() }
+    ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser -> presenter.doRate(ratingBar, rating, fromUser) }
 
   }
 
@@ -71,6 +71,8 @@ class HillfortView : BaseView(), AnkoLogger {
     checkBox.isChecked = hillfort.explored
 
     favBox.isChecked = hillfort.fav
+
+    ratingBar.rating = hillfort.rate
 
     lat.setText("%.6f".format(hillfort.lat))
     lng.setText("%.6f".format(hillfort.lng))
