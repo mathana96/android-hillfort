@@ -1,32 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context="org.mathana.hillfort.activities.HillfortActivity">
+  android:layout_height="match_parent">
 
-  <android.support.design.widget.AppBarLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorAccent"
-    android:fitsSystemWindows="true"
-    app:elevation="0dip"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbarMain"
-      android:layout_width="match_parent"
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBarLayout3"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      app:titleTextColor="@color/colorPrimary"/>
-  </android.support.design.widget.AppBarLayout>
+      android:layout_marginBottom="74dp"
+      android:background="@color/colorAccent"
+      android:fitsSystemWindows="true"
+      app:elevation="0dip"
+      app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-  <android.support.v7.widget.RecyclerView
-    android:id="@+id/recyclerView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/colorPrimary" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:scrollbars="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/appBarLayout3" />
+
+    <EditText
+      android:id="@+id/hillfortSearch"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="7dp"
+      android:layout_marginTop="12dp"
+      android:layout_marginEnd="15dp"
+      android:ems="10"
+      android:hint="@string/hint_search"
+      android:inputType="text"
+      app:layout_constraintEnd_toStartOf="@+id/switchFav"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/appBarLayout3" />
+
+    <Switch
+      android:id="@+id/switchFav"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:text="Favourites"
+      app:layout_constraintBaseline_toBaselineOf="@+id/hillfortSearch"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/hillfortSearch" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

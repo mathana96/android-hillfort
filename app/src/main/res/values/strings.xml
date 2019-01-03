@@ -4,14 +4,15 @@
 
   <!--BUTTONS-->
   <string name="button_addHillfort">Add Hillfort</string>
-  <string name="button_saveHillfort">Save Hillfort</string>
-  <string name="button_deleteHillfort">Delete Hillfort</string>
+  <string name="button_saveHillfort">Save</string>
+  <string name="button_deleteHillfort">Delete</string>
   <string name="button_addImage"> Add Image </string>
   <string name="button_changeImage"> Add Another Image </string>
   <string name="button_location">Set Location</string>
   <string name="menu_addHillfort">Add</string>
   <string name="menu_settings">Settings</string>
   <string name="menu_cancelHillfort">Cancel</string>
+  <string name="menu_map">Map</string>
 
   <string name="button_login">Login</string>
   <string name="button_signup">Signup</string>
@@ -27,18 +28,26 @@
   <string name="title_num_visited">Hillforts visited</string>
 
   <!--CHECKBOX-->
-  <string name="checkbox_explored">Explored!</string>
+  <string name="checkbox_explored"><font size="15">Explored</font></string>
 
   <!--TEXT FIELD HINTS-->
   <string name="hint_hillfortTitle">Hillfort Title</string>
   <string name="hint_hillfortDescription">Hillfort Description</string>
   <string name="hint_username">Enter username</string>
   <string name="hint_password">Enter password</string>
-  <string name="hint_date">Date of exploration :)</string>
+  <string name="hint_date">Date</string>
   <string name="hint_notes">Jot your thoughts here :)</string>
 
   <!--TOAST TEXT-->
   <string name="toast_enterTitleandDesc">Please enter a title and description</string>
   <string name="select_hillfort_image">Select hillfort image</string>
   <string name="title_activity_maps">Map</string>
+  <string name="title_activity_hillforts_map">Map of all Hillforts</string>
+
+  <string name="title_activity_hillfort_list">Hillforts</string>
+  <string name="title_activity_hillfort">Hillfort</string>
+  <string name="title_activity_edit_location">Hillfort</string>
+
+  <string name="hint_search">Search Hillfort</string>
+
 </resources>

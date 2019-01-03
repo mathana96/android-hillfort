@@ -1,111 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="org.mathana.hillfort.activities.HillfortActivity">
+  tools:context="org.mathana.hillfort.views.hillfort.HillfortView">
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@color/colorAccent"
+    android:fitsSystemWindows="true"
+    app:elevation="0dip"
+    app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <android.support.design.widget.AppBarLayout
-      android:id="@+id/appBarLayout"
+    <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbarAdd"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/colorAccent"
-      android:fitsSystemWindows="true"
-      app:elevation="0dip"
-      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+      app:titleTextColor="@color/colorPrimary" />
 
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorPrimary" />
-    </android.support.design.widget.AppBarLayout>
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintLayout"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+    <EditText
+      android:id="@+id/hillfortTitle"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="1dp"
+      android:ems="10"
+      android:hint="@string/hint_hillfortTitle"
+      android:inputType="text"
+      app:layout_constraintEnd_toEndOf="@+id/hillfortDescription"
+      app:layout_constraintEnd_toStartOf="@+id/textView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+      android:id="@+id/hillfortDescription"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:hint="@string/hint_hillfortDescription"
+      android:inputType="textPersonName"
+      app:layout_constraintEnd_toStartOf="@+id/textView2"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/hillfortTitle" />
+
+    <CheckBox
+      android:id="@+id/checkBox"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignStart="@+id/imageIcon"
+      android:layout_alignParentBottom="true"
+      android:layout_marginStart="210dp"
+      android:onClick="onCheckboxClicked"
+      app:layout_constraintBottom_toTopOf="@+id/mapView"
+      app:layout_constraintEnd_toStartOf="@+id/dateExplored"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+      android:id="@+id/favBox"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignStart="@+id/imageIcon"
+      android:layout_alignParentBottom="true"
+      android:onClick="onCheckboxClicked"
+      app:layout_constraintStart_toStartOf="@+id/textView3"
+      app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+      android:id="@+id/dateExplored"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:ellipsize="start"
+
+      android:ems="10"
+      android:inputType="date"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/textView3"
+      app:layout_constraintTop_toBottomOf="@+id/hillfortDescription" />
+
+    <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="21dp"
+      android:text="Lat:"
+      app:layout_constraintBaseline_toBaselineOf="@+id/hillfortTitle"
+      app:layout_constraintEnd_toStartOf="@+id/lat"
+      app:layout_constraintStart_toEndOf="@+id/hillfortTitle" />
+
+    <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="19dp"
+      android:layout_marginBottom="11dp"
+      android:text="Lng:"
+      app:layout_constraintBottom_toBottomOf="@+id/hillfortDescription"
+      app:layout_constraintEnd_toStartOf="@+id/lng"
+      app:layout_constraintStart_toEndOf="@+id/hillfortDescription" />
+
+    <TextView
+      android:id="@+id/lat"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="16dp"
+      android:text="00.000000"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/textView"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/lng"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="24dp"
+      android:text="00.000000"
+      app:layout_constraintBottom_toTopOf="@+id/dateExplored"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <TextView
+      android:id="@+id/textView3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="6dp"
+      android:layout_marginEnd="208dp"
+      android:text="Fav:"
+      app:layout_constraintEnd_toStartOf="@+id/dateExplored"
+      app:layout_constraintHorizontal_chainStyle="spread_inside"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/hillfortDescription" />
+
+    <TextView
+      android:id="@+id/textView4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="44dp"
+      android:layout_marginTop="52dp"
+      android:text="Rate:"
+      app:layout_constraintStart_toEndOf="@+id/textView3"
+      app:layout_constraintTop_toTopOf="@+id/hillfortDescription" />
+
+    <TextView
+      android:id="@+id/textView5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="128dp"
+      android:layout_marginTop="12dp"
+      android:text="Explored:"
+      app:layout_constraintStart_toEndOf="@+id/textView4"
+      app:layout_constraintTop_toBottomOf="@+id/lng" />
+
+    <com.google.android.gms.maps.MapView
+      android:id="@+id/mapView"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="150dp"
+      android:layout_marginBottom="8dp"
+      android:nestedScrollingEnabled="false"
+      app:layout_constraintBottom_toTopOf="@+id/scrollView6"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
 
     <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_below="@id/appBarLayout"
-      android:fillViewport="true">
+      android:id="@+id/scrollView6"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/mapView">
 
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputEditText
-          android:id="@+id/hillfortTitle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:hint="@string/hint_hillfortTitle"
-          android:inputType="text"
-          android:maxLength="25"
-          android:maxLines="1"
-          android:padding="8dp"
-          android:textColor="@color/colorPrimaryDark"
-          android:textSize="14sp" />
-
-        <android.support.design.widget.TextInputEditText
-          android:id="@+id/hillfortDescription"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:hint="@string/hint_hillfortDescription"
-          android:inputType="text"
-          android:maxLength="25"
-          android:maxLines="1"
-          android:padding="8dp"
-          android:textColor="@color/colorPrimaryDark"
-          android:textSize="14sp" />
-
-        <CheckBox
-          android:id="@+id/checkBox"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_alignStart="@+id/imageIcon"
-          android:layout_marginBottom="14dp"
-          android:onClick="onCheckboxClicked"
-          android:text="@string/checkbox_explored" />
-
-        <EditText
-          android:id="@+id/dateExplored"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:hint="@string/hint_date"
-          android:ellipsize="start"
-          android:gravity="center_horizontal"
-          android:ems="10"
-          android:inputType="date" />
-
         <EditText
           android:id="@+id/addNotes"
           android:layout_width="match_parent"
-          android:layout_height="110dp"
-          android:hint="@string/hint_notes"
-          android:ellipsize="start"
-          android:gravity="center_horizontal"
-          android:ems="10"
+          android:layout_height="85dp"
           android:background="@android:color/darker_gray"
+          android:ellipsize="start"
+          android:ems="10"
+          android:gravity="center_horizontal"
+          android:hint="@string/hint_notes"
           android:inputType="textMultiLine" />
-
-        <Button
-          android:id="@+id/hillfortLocation"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@android:color/holo_blue_light"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:stateListAnimator="@null"
-          android:text="@string/button_location"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp" />
 
         <Button
           android:id="@+id/chooseImage"
@@ -113,50 +223,69 @@
           android:layout_height="wrap_content"
           android:layout_margin="16dp"
           android:background="@android:color/holo_blue_light"
-          android:paddingBottom="8dp"
           android:paddingTop="8dp"
+          android:paddingBottom="8dp"
           android:text="@string/button_addImage"
           android:textColor="@color/colorPrimary"
           android:textSize="16sp" />
 
-        <Button
-          android:id="@+id/btnAdd"
-          android:layout_width="match_parent"
+        <!--<Button-->
+        <!--android:id="@+id/hillfortLocation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:background="@android:color/holo_blue_light"-->
+        <!--android:paddingBottom="8dp"-->
+        <!--android:paddingTop="8dp"-->
+        <!--android:stateListAnimator="@null"-->
+        <!--android:text="@string/button_location"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:textSize="16sp" />-->
+
+        <ListView
+          android:id="@+id/hillfortImages"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@android:color/holo_green_light"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:stateListAnimator="@null"
-          android:text="@string/button_addHillfort"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp" />
+          android:layout_marginTop="25dp"
+          android:nestedScrollingEnabled="true"
+          tools:layout_editor_absoluteX="0dp"
+          tools:layout_editor_absoluteY="619dp" />
 
         <Button
           android:id="@+id/btnDelete"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_margin="16dp"
-          android:background="@android:color/holo_red_light"
-          android:paddingBottom="8dp"
+          android:background="@android:color/holo_red_dark"
           android:paddingTop="8dp"
+          android:paddingBottom="8dp"
           android:stateListAnimator="@null"
           android:text="@string/button_deleteHillfort"
           android:textColor="@color/colorPrimary"
           android:textSize="16sp" />
 
-        <ListView
-          android:id="@+id/hillfortImages"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:nestedScrollingEnabled="true"
-          android:layout_marginTop="25dp"
-          tools:layout_editor_absoluteX="0dp"
-          tools:layout_editor_absoluteY="619dp" />
-
       </LinearLayout>
+
 
     </ScrollView>
 
-  </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+    <RatingBar
+      android:id="@+id/ratingBar"
+      android:layout_width="244dp"
+      android:layout_height="41dp"
+      android:layout_marginStart="40dp"
+      android:layout_marginTop="24dp"
+      android:isIndicator="false"
+      android:stepSize="1.0"
+      android:max="5"
+      android:scaleX=".5"
+      android:scaleY=".5"
+      android:transformPivotX="0dp"
+      android:transformPivotY="0dp"
+      app:layout_constraintStart_toEndOf="@+id/favBox"
+      app:layout_constraintTop_toBottomOf="@+id/hillfortDescription" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 package org.mathana.hillfort.activities
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -10,6 +10,7 @@ import org.mathana.hillfort.R
 
 import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.UserModel
+import org.mathana.hillfort.views.hillfortlist.HillfortListView
 
 class SettingsActivity: AppCompatActivity(), AnkoLogger {
 
@@ -43,7 +44,7 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
       current_user.password = settings_password.text.toString()
       app.users.updateUser(current_user.copy())
       toast("Details updated")
-      startActivityForResult(intentFor<HillfortListActivity>().putExtra("current_user", current_user), 0)
+      startActivityForResult(intentFor<HillfortListView>().putExtra("current_user", current_user), 0)
       finish()
     }
 

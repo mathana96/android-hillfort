@@ -1,10 +1,14 @@
 package org.mathana.hillfort.models
 
 import android.content.Context
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
+import org.mathana.hillfort.R.id.map
 import org.mathana.hillfort.helpers.exists
 import org.mathana.hillfort.helpers.read
 import org.mathana.hillfort.helpers.write
@@ -82,7 +86,9 @@ class UserJSONStore : UserStore, AnkoLogger {
       foundhillfort.lat = hillfort.lat
       foundhillfort.lng = hillfort.lng
       foundhillfort.zoom = hillfort.zoom
+      foundhillfort.rate = hillfort.rate
       foundhillfort.explored = hillfort.explored
+      foundhillfort.fav = hillfort.fav
       foundhillfort.date = hillfort.date
       foundhillfort.notes = hillfort.notes
     }
@@ -93,6 +99,17 @@ class UserJSONStore : UserStore, AnkoLogger {
     var founduser = users.find { u -> u.id == user.id }
     founduser!!.hillforts.remove(hillfort)
     serialize()
+  }
+
+  override fun findById(id:Long) : HillfortModel? {
+    findAllUsers().forEach { user ->
+      user.hillforts.forEach {hillfort ->
+        if (hillfort.id == id) {
+          return hillfort
+        }
+      }
+    }
+    return null
   }
 
   private fun serialize() {
