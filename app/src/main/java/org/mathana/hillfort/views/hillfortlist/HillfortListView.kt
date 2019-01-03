@@ -46,18 +46,14 @@ class HillfortListView: BaseView(), HillfortListener, AnkoLogger {
       override fun onQueryTextChange(newText: String): Boolean {
         if (newText.isEmpty())
           presenter.loadHillforts()
+        else
+          presenter.doSearch(newText)
         return false
       }
 
-      override fun onQueryTextSubmit(query: String): Boolean {
-        presenter.doSearch(query)
-        return false
-      }
-
+      override fun onQueryTextSubmit(query: String): Boolean { return false }
     })
-
-
-
+    
   }
 
   override fun showHillforts(hillforts: List<HillfortModel>) {
