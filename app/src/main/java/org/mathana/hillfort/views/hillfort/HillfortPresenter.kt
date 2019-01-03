@@ -12,6 +12,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 import org.jetbrains.anko.intentFor
 import org.mathana.hillfort.R.id.map
@@ -32,7 +34,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HillfortPresenter(view: HillfortView): BasePresenter(view) {
+class HillfortPresenter(view: HillfortView): BasePresenter(view), AnkoLogger {
 
 
   var hillfort = HillfortModel()
@@ -184,6 +186,16 @@ class HillfortPresenter(view: HillfortView): BasePresenter(view) {
       hillfort.explored = false
       hillfort.date = ""
     }
+  }
+
+  fun doOnFavBoxClicked(checked: Boolean) {
+    if (checked) {
+      hillfort.fav = true
+    }
+    if (!checked) {
+      hillfort.fav = false
+    }
+    info("hillfort status: ${hillfort.fav}")
   }
 
 }

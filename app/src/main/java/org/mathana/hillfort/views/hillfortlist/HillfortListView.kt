@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
+import org.mathana.hillfort.R.id.recyclerView
 import org.mathana.hillfort.adapters.HillfortAdapter
 import org.mathana.hillfort.adapters.HillfortListener
 import org.mathana.hillfort.models.HillfortModel
@@ -31,6 +33,9 @@ class HillfortListView: BaseView(), HillfortListener, AnkoLogger {
     recyclerView.layoutManager = layoutManager
 
     presenter.loadHillforts()
+
+
+    switchFav.setOnCheckedChangeListener { buttonView, isChecked -> presenter.doFavSwitch(buttonView, isChecked) }
 
   }
 
