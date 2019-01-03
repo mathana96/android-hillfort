@@ -70,6 +70,8 @@ class HillfortView : BaseView(), AnkoLogger {
 
     checkBox.isChecked = hillfort.explored
 
+    favBox.isChecked = hillfort.fav
+
     lat.setText("%.6f".format(hillfort.lat))
     lng.setText("%.6f".format(hillfort.lng))
 
@@ -127,9 +129,19 @@ class HillfortView : BaseView(), AnkoLogger {
           }
 
         }
+        R.id.favBox -> {
+          if (favBox.isChecked) {
+            presenter.doOnFavBoxClicked(true)
+          }
+          if (favBox.isChecked.not()) {
+            presenter.doOnFavBoxClicked(false)
+          }
+
+        }
       }
     }
   }
+
 
   override fun showImages (hillfort: HillfortModel) {
     if (hillfort.images.isNotEmpty()) {

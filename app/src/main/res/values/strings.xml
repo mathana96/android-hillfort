@@ -28,7 +28,7 @@
   <string name="title_num_visited">Hillforts visited</string>
 
   <!--CHECKBOX-->
-  <string name="checkbox_explored">Explored?</string>
+  <string name="checkbox_explored"><font size="15">Explored</font></string>
 
   <!--TEXT FIELD HINTS-->
   <string name="hint_hillfortTitle">Hillfort Title</string>
@@ -47,5 +47,7 @@
   <string name="title_activity_hillfort_list">Hillforts</string>
   <string name="title_activity_hillfort">Hillfort</string>
   <string name="title_activity_edit_location">Hillfort</string>
+
+  <string name="hint_search">Search Hillfort</string>
 
 </resources>

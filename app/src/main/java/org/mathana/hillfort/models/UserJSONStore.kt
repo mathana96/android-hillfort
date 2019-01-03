@@ -87,6 +87,7 @@ class UserJSONStore : UserStore, AnkoLogger {
       foundhillfort.lng = hillfort.lng
       foundhillfort.zoom = hillfort.zoom
       foundhillfort.explored = hillfort.explored
+      foundhillfort.fav = hillfort.fav
       foundhillfort.date = hillfort.date
       foundhillfort.notes = hillfort.notes
     }
