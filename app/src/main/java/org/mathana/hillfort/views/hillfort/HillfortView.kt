@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.CheckBox
 import android.widget.ListView
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
@@ -22,6 +23,8 @@ import java.util.*
 class HillfortView : BaseView(), AnkoLogger {
 
   lateinit var presenter : HillfortPresenter
+  lateinit var map: GoogleMap
+
   var hillfort = HillfortModel()
 
   private lateinit var listView : ListView
@@ -31,19 +34,25 @@ class HillfortView : BaseView(), AnkoLogger {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort)
 
-    toolbarAdd.title = title
-    setSupportActionBar(toolbarAdd)
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    init(toolbarAdd)
+
 
     listView = findViewById(R.id.hillfortImages)
 
     presenter = HillfortPresenter(this)
 
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync {
+      map = it
+      presenter.doConfigureMap(map)
+      it.setOnMapClickListener { presenter.doSetLocation() }
+    }
+
     btnDelete.setOnClickListener { presenter.doDelete() }
 
     chooseImage.setOnClickListener { presenter.doSelectImage() }
 
-    hillfortLocation.setOnClickListener { presenter.doSetLocation() }
+//    hillfortLocation.setOnClickListener { presenter.doSetLocation() }
 
   }
 
@@ -60,6 +69,9 @@ class HillfortView : BaseView(), AnkoLogger {
     }
 
     checkBox.isChecked = hillfort.explored
+
+    lat.setText("%.6f".format(hillfort.lat))
+    lng.setText("%.6f".format(hillfort.lng))
 
   }
 
@@ -125,6 +137,32 @@ class HillfortView : BaseView(), AnkoLogger {
       listView.adapter = ImageAdapter(images, this)
     }
 
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    mapView.onDestroy()
+  }
+
+  override fun onLowMemory() {
+    super.onLowMemory()
+    mapView.onLowMemory()
+  }
+
+  override fun onPause() {
+    super.onPause()
+    mapView.onPause()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    mapView.onResume()
+    presenter.doResartLocationUpdates()
+  }
+
+  override fun onSaveInstanceState(outState: Bundle?) {
+    super.onSaveInstanceState(outState)
+    mapView.onSaveInstanceState(outState)
   }
 
 }
