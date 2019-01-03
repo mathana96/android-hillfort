@@ -2,7 +2,7 @@ package org.mathana.hillfort.activities
 
 import android.os.Bundle
 import android.app.Activity
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -26,9 +26,11 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillforts_map)
-    setSupportActionBar(toolbarMaps)
+
 
     presenter = HillfortsMapPresenter(this)
+
+    super.init(toolbarMaps, false)
 
     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync {
@@ -75,7 +77,7 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     mapView.onResume()
   }
 
-  override fun onSaveInstanceState(outState: Bundle?) {
+  override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     mapView.onSaveInstanceState(outState)
   }

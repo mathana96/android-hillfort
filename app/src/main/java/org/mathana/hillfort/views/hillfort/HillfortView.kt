@@ -1,7 +1,7 @@
 package org.mathana.hillfort.views.hillfort
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -34,7 +34,7 @@ class HillfortView : BaseView(), AnkoLogger {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort)
 
-    init(toolbarAdd)
+    super.init(toolbarAdd, true)
 
 
     listView = findViewById(R.id.hillfortImages)
@@ -160,7 +160,7 @@ class HillfortView : BaseView(), AnkoLogger {
     presenter.doResartLocationUpdates()
   }
 
-  override fun onSaveInstanceState(outState: Bundle?) {
+  override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     mapView.onSaveInstanceState(outState)
   }
