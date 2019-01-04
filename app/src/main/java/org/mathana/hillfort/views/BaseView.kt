@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
 import org.mathana.hillfort.activities.HillfortsMapView
 import org.mathana.hillfort.activities.LoginView
+import org.mathana.hillfort.activities.SettingsActivity
 
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.views.editlocation.EditLocationView
@@ -32,7 +33,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.HILLFORT -> intent = Intent(this, HillfortView::class.java)
       VIEW.MAPS -> intent = Intent(this, HillfortsMapView::class.java)
       VIEW.LIST -> intent = Intent(this, HillfortListView::class.java)
-//      VIEW.SETTINGS -> intent = Intent(this, SettingsActivity::class.java)
+      VIEW.SETTINGS -> intent = Intent(this, SettingsActivity::class.java)
       VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
     }
     if (key != "") {
