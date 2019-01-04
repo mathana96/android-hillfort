@@ -1,4 +1,4 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.login
 
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.toast

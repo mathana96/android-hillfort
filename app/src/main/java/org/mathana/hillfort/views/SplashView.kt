@@ -1,14 +1,15 @@
 /**
  * Adapted from: http://devdeeds.com/android-create-splash-screen-kotlin/
  */
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import org.mathana.hillfort.R
+import org.mathana.hillfort.views.login.LoginView
 
-class SplashActivity : AppCompatActivity() {
+class SplashView : AppCompatActivity() {
   lateinit var mDelayHandler : Handler
   private val SPLASH_DELAY: Long = 2000 //3 seconds
 

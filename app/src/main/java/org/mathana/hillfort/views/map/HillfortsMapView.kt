@@ -1,21 +1,13 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.map
 
 import android.os.Bundle
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import org.mathana.hillfort.R
 
 import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
-import org.mathana.hillfort.R.id.*
-import org.mathana.hillfort.helpers.readImageFromPath
-import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.views.BaseView
 
