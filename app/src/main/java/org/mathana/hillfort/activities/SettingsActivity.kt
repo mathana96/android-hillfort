@@ -33,7 +33,6 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
     settings_username.setText(user!!.email)
 
 
-
     btn_save_settings.setOnClickListener {
       info ("Saved settings clicked")
 
@@ -49,13 +48,19 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
       finish()
     }
 
-//    btn_delete_account.setOnClickListener {
-//      info ("Delete button clicked")
-//      app.users.deleteUser(current_user.copy())
-//      finishAffinity()
-//      startActivity<LoginView>()
-//      finish()
-//    }
+    btn_delete_account.setOnClickListener {
+      user!!.delete().addOnCompleteListener { task ->
+        if (task.isSuccessful) {
+          toast("Account deleted")
+        } else {
+          println("Error Update")
+          toast("Error Update")
+        }
+      }
+      finishAffinity()
+      startActivity<LoginView>()
+      finish()
+    }
 
   }
 
