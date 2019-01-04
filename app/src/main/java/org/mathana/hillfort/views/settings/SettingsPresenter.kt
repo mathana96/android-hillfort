@@ -39,8 +39,9 @@ class SettingsPresenter(view: SettingsView): BasePresenter(view), AnkoLogger {
         info("DELETED FROM DB")
         user!!.delete().addOnCompleteListener { task ->
           if (task.isSuccessful) {
-
             view?.navigateTo(VIEW.LOGIN)
+            view?.finish()
+            app.hillforts.clear()
             view!!.toast("Account Deleted")
           } else {
             info("Error Deleting")
