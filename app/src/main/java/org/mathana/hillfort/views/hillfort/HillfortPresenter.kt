@@ -13,6 +13,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -39,29 +41,19 @@ class HillfortPresenter(view: HillfortView): BasePresenter(view), AnkoLogger {
 
 
   var hillfort = HillfortModel()
-  var current_user = UserModel()
 
   var map: GoogleMap? = null
   var defaultLocation = Location(52.245696, -7.139102, 15f)
 
   var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
-
   val locationRequest = createDefaultLocationRequest()
 
   var edit = false
 
 
   init {
-    app = view.application as MainApp
-    if (view.intent.hasExtra("current_user")) {
-      current_user = view.intent.extras.getParcelable<UserModel>("current_user")
-      view.showHillfort(hillfort)
-      view.btnDelete.visibility = View.INVISIBLE
-
-    }
-    if (view.intent.hasExtra("hillfort_edit") && view.intent.hasExtra("current_user")) {
+    if (view.intent.hasExtra("hillfort_edit")) {
       edit = true
-      current_user = view.intent.extras.getParcelable<UserModel>("current_user")
       hillfort = view.intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       view.showHillfort(hillfort)
       view.btnDelete.visibility = View.VISIBLE
@@ -125,12 +117,14 @@ class HillfortPresenter(view: HillfortView): BasePresenter(view), AnkoLogger {
     hillfort.description = description
     hillfort.notes = notes
 
-    if (edit) {
-      app.users.updateHillfort(current_user, hillfort)
-    } else {
-      app.users.createHillfort(current_user, hillfort)
+    async(UI) {
+      if (edit) {
+        app.hillforts.update(hillfort)
+      } else {
+        app.hillforts.create(hillfort)
+      }
+      view?.finish()
     }
-    view?.finish()
   }
 
   fun doCancel() {
@@ -138,12 +132,16 @@ class HillfortPresenter(view: HillfortView): BasePresenter(view), AnkoLogger {
   }
 
   fun doDelete() {
-    app.users.deleteHillfort(current_user, hillfort)
-    view?.finish()
+    async(UI) {
+      app.hillforts.delete(hillfort)
+      view?.finish()
+    }
   }
 
   fun doSelectImage() {
-    showImagePicker(view!!, IMAGE_REQUEST)
+    view?.let {
+      showImagePicker(view!!, IMAGE_REQUEST)
+    }
   }
 
   fun doSetLocation() {
