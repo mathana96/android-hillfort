@@ -123,13 +123,10 @@ class HillfortPresenter(view: HillfortView): BasePresenter(view), AnkoLogger {
     async(UI) {
       if (edit) {
         app.hillforts.update(hillfort)
-        delay(3000)
 
       } else {
         app.hillforts.create(hillfort)
-        delay(3000)
       }
-      info("made it here")
       view?.finish()
     }
   }

@@ -32,21 +32,24 @@ class SettingsPresenter(view: SettingsView): BasePresenter(view), AnkoLogger {
 
   fun doDeleteAccount() {
     info ("Saved settings clicked")
-    val db = FirebaseDatabase.getInstance().getReference().child("users")
-    db.child(user!!.uid).removeValue().addOnCompleteListener { task ->
+    val db = FirebaseDatabase.getInstance()
+    info("UID: ${user!!.uid}")
+    db.getReference().child("users").child(user!!.uid).removeValue().addOnCompleteListener { task ->
       if (task.isSuccessful) {
+        info("DELETED FROM DB")
         user!!.delete().addOnCompleteListener { task ->
           if (task.isSuccessful) {
 
             view?.navigateTo(VIEW.LOGIN)
             view!!.toast("Account Deleted")
           } else {
-            println("Error Deleting")
+            info("Error Deleting")
             view!!.toast("Error Deleting")
           }
         }
+
       } else {
-        println("Error Deleting")
+        info("Error Deleting")
         view!!.toast("Error Deleting")
       }
 
