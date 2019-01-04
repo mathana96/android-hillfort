@@ -30,6 +30,10 @@ class SettingsView: BaseView(), AnkoLogger {
     btn_save_settings.setOnClickListener {
       presenter.doSaveSettings()
     }
+
+    btn_delete_account.setOnClickListener {
+      presenter.doDeleteAccount()
+    }
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
