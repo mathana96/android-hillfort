@@ -1,4 +1,4 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.map
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -6,8 +6,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.experimental.android.UI
-import org.mathana.hillfort.R.id.map
-import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.views.BasePresenter
 import org.mathana.hillfort.views.BaseView

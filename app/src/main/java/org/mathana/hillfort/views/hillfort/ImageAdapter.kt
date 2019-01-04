@@ -5,7 +5,7 @@
  *
  */
 
-package org.mathana.hillfort.adapters
+package org.mathana.hillfort.views.hillfort
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,7 +1,6 @@
 package org.mathana.hillfort.views.hillfort
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,8 +11,6 @@ import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
-import org.mathana.hillfort.R.id.*
-import org.mathana.hillfort.adapters.ImageAdapter
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.views.BaseView
 import java.text.SimpleDateFormat

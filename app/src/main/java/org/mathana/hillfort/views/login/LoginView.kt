@@ -1,16 +1,11 @@
-package org.mathana.hillfort.activities
+package org.mathana.hillfort.views.login
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.R
-import org.mathana.hillfort.R.id.*
-import org.mathana.hillfort.main.MainApp
-import org.mathana.hillfort.models.UserModel
 import org.mathana.hillfort.views.BaseView
-import org.mathana.hillfort.views.hillfortlist.HillfortListView
 
 class LoginView : BaseView() {
 

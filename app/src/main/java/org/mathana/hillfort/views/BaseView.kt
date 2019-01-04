@@ -5,14 +5,13 @@ import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
-import org.mathana.hillfort.activities.HillfortsMapView
-import org.mathana.hillfort.activities.LoginView
-import org.mathana.hillfort.activities.SettingsActivity
+import org.mathana.hillfort.views.map.HillfortsMapView
+import org.mathana.hillfort.views.login.LoginView
+import org.mathana.hillfort.views.settings.SettingsView
 
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.views.editlocation.EditLocationView
 import org.mathana.hillfort.views.hillfort.HillfortView
-import org.mathana.hillfort.views.hillfortlist.HillfortListPresenter
 import org.mathana.hillfort.views.hillfortlist.HillfortListView
 
 val IMAGE_REQUEST = 1
@@ -33,23 +32,11 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.HILLFORT -> intent = Intent(this, HillfortView::class.java)
       VIEW.MAPS -> intent = Intent(this, HillfortsMapView::class.java)
       VIEW.LIST -> intent = Intent(this, HillfortListView::class.java)
-      VIEW.SETTINGS -> intent = Intent(this, SettingsActivity::class.java)
+      VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)
       VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
-    }
-    startActivityForResult(intent, code)
-  }
-
-  fun navigateToHillfort(view: VIEW, code: Int = 0, key1: String = "", value1: Parcelable? = null,
-                         key2: String = "", value2: Parcelable? = null) {
-    var intent = Intent(this, HillfortListView::class.java)
-    when (view) {
-      VIEW.HILLFORT -> intent = Intent(this, HillfortView::class.java)
-    }
-    if (key1 != "" && key2 != "") {
-      intent.putExtra(key1, value1).putExtra(key2, value2)
     }
     startActivityForResult(intent, code)
   }

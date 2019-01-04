@@ -2,18 +2,12 @@ package org.mathana.hillfort.views.hillfortlist
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
-import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onQueryTextListener
 import org.mathana.hillfort.R
-import org.mathana.hillfort.R.id.recyclerView
-import org.mathana.hillfort.adapters.HillfortAdapter
-import org.mathana.hillfort.adapters.HillfortListener
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.views.BaseView
 

@@ -6,18 +6,11 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
-import org.mathana.hillfort.activities.HillfortsMapView
 
-import org.mathana.hillfort.main.MainApp
 import org.mathana.hillfort.models.HillfortModel
-import org.mathana.hillfort.models.UserModel
 import org.mathana.hillfort.views.BasePresenter
 import org.mathana.hillfort.views.BaseView
 import org.mathana.hillfort.views.VIEW
-import org.mathana.hillfort.views.hillfort.HillfortView
-import java.util.Locale.filter
 
 class HillfortListPresenter(view: BaseView): BasePresenter(view), AnkoLogger {
 
