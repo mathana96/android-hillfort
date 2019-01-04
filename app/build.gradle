@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: "kotlin-kapt"
+
+apply plugin: 'com.google.gms.google-services'
+
+androidExtensions {
+  experimental = true
+}
+
 android {
   compileSdkVersion 28
   defaultConfig {
@@ -22,8 +30,25 @@ android {
   }
 }
 
-androidExtensions {
-  experimental = true
+ext {
+  app_compat_version = '1.0.2'
+  constraint_layout_version = '2.0.0-alpha2'
+  material_version = '1.0.0'
+  cardview_version = '1.0.0'
+  design_library_version = '26.1.0'
+  support_library_version = '26.1.0'
+
+  play_services_maps_version = '16.0.0'
+  play_services_location_version = '16.0.0'
+
+  anko_version = '0.10.7'
+  anko_commons_version = '0.10.7'
+  gson_version = '2.8.5'
+
+  room_version = "2.0.0"
+  firebase_version = '16.0.5'
+
+  glide_version = '4.8.0'
 }
 
 dependencies {
@@ -41,9 +66,23 @@ dependencies {
   //had to add this line to suppress warning of gradle mixed versions which came up after adding the google maps implementation
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
   implementation 'com.squareup.picasso:picasso:2.71828'
-  testImplementation 'junit:junit:4.12'
+
+  implementation "com.google.firebase:firebase-auth:$firebase_version"
+  implementation "com.google.firebase:firebase-database:$firebase_version"
+
+
   implementation "com.google.code.gson:gson:2.8.5"
+  implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+  implementation "com.github.bumptech.glide:glide:$glide_version"
+
+  implementation "androidx.room:room-runtime:$room_version"
+  kapt "androidx.room:room-compiler:$room_version"
+
+
+  testImplementation 'junit:junit:4.12'
+
   androidTestImplementation 'androidx.test:runner:1.1.1'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-  implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
 }

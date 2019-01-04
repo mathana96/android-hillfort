@@ -1,10 +1,14 @@
 package org.mathana.hillfort.models
 
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class HillfortModel(var id: Long = 0,
+data class HillfortModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
+                         var fbId : String = "",
                           var title: String = "",
                           var description: String = "",
                           var images: ArrayList<String> = ArrayList(),

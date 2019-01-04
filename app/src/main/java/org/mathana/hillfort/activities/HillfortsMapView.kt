@@ -3,6 +3,7 @@ package org.mathana.hillfort.activities
 import android.os.Bundle
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -20,32 +21,28 @@ import org.mathana.hillfort.views.BaseView
 
 class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
-  lateinit var map: GoogleMap
   lateinit var presenter: HillfortsMapPresenter
+  lateinit var map : GoogleMap
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillforts_map)
+    super.init(toolbarMaps, true)
 
+    presenter = initPresenter (HillfortsMapPresenter(this)) as HillfortsMapPresenter
 
-    presenter = HillfortsMapPresenter(this)
-
-    super.init(toolbarMaps, false)
-
-    mapView.onCreate(savedInstanceState)
+    mapView.onCreate(savedInstanceState);
     mapView.getMapAsync {
       map = it
       map.setOnMarkerClickListener(this)
-      presenter.loadHillforts()
-
+      presenter.loadPlacemarks()
     }
   }
 
   override fun showHillfort(hillfort: HillfortModel) {
-    currentTitle.text = hillfort!!.title
-    currentDescription.text = hillfort!!.description
-    if (hillfort.images.size > 0)
-      imageView.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
+    currentTitle.text = hillfort.title
+    currentDescription.text = hillfort.description
+    Glide.with(this).load(hillfort.images.get(0)).into(imageView);
   }
 
   override fun showHillforts(hillforts: List<HillfortModel>) {
