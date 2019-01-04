@@ -1,43 +1,42 @@
-//package org.mathana.hillfort.activities
-//
-//import android.os.Bundle
-//import androidx.appcompat.app.AppCompatActivity
-//import android.view.Menu
-//import android.view.MenuItem
-//import kotlinx.android.synthetic.main.activity_settings.*
-//import org.jetbrains.anko.*
-//import org.mathana.hillfort.R
-//
-//import org.mathana.hillfort.main.MainApp
-//import org.mathana.hillfort.models.UserModel
-//import org.mathana.hillfort.views.hillfortlist.HillfortListView
-//
-//class SettingsActivity: AppCompatActivity(), AnkoLogger {
-//
-//
-//  lateinit var app : MainApp
-//
-//  var current_user = UserModel()
-//
-//  override fun onCreate(savedInstanceState: Bundle?) {
-//    super.onCreate(savedInstanceState)
-//    setContentView(R.layout.activity_settings)
-//
-//    app = application as MainApp
-//
-//    setSupportActionBar(toolbarSettings)
-//    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//
-//    if (intent.hasExtra("current_user")) {
-//      current_user = intent.extras.getParcelable<UserModel>("current_user")
-//      settings_username.setText(current_user.username)
+package org.mathana.hillfort.activities
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_settings.*
+import org.jetbrains.anko.*
+import org.mathana.hillfort.R
+
+import org.mathana.hillfort.main.MainApp
+import org.mathana.hillfort.models.UserModel
+import org.mathana.hillfort.views.hillfortlist.HillfortListView
+
+class SettingsActivity: AppCompatActivity(), AnkoLogger {
+
+
+  lateinit var app : MainApp
+
+
+  val user = FirebaseAuth.getInstance().currentUser
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_settings)
+
+    setSupportActionBar(toolbarSettings)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
+    settings_username.setText(user!!.email)
 //      settings_password.setText(current_user.password)
 //      total_hillforts.setText(getTotalHillforts(current_user))
 //      hillforts_visited.setText(getHillfortsVisited(current_user))
 //      info("This is the logged in user: $current_user")
-//
-//    }
-//
+
+
 //    btn_save_settings.setOnClickListener {
 //      info ("Saved settings clicked")
 //      current_user.username = settings_username.text.toString()
@@ -55,33 +54,28 @@
 //      startActivity<LoginView>()
 //      finish()
 //    }
-//
-//  }
-//
-//  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//    menuInflater.inflate(R.menu.menu_settings, menu)
-//    return super.onCreateOptionsMenu(menu)
-//  }
-//
-//  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//    when (item?.itemId) {
-//      R.id.item_cancel -> {
-//        finish()
-//      }
-//      R.id.item_logout -> {
-//        info ("Logout button clicked")
-//        finishAffinity(); //https://stackoverflow.com/a/9580057/8083587
-//        startActivity<LoginView>()
-//        finish()
-//      }
-//      android.R.id.home -> {
-//        finish()
-//        return true
-//      }
-//    }
-//    return super.onOptionsItemSelected(item)
-//  }
-//
+
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_settings, menu)
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      R.id.item_cancel -> {
+        finish()
+      }
+
+      android.R.id.home -> {
+        finish()
+        return true
+      }
+    }
+    return super.onOptionsItemSelected(item)
+  }
+
 //  fun getTotalHillforts(user: UserModel) : String {
 //    val foundUser: UserModel? = app.users.findAllUsers().find { u -> u.id == user.id }
 //    return foundUser!!.hillforts.size.toString()
@@ -97,5 +91,5 @@
 //    info("COUNT: $count")
 //    return count.toString()
 //  }
-//
-//}
+
+}

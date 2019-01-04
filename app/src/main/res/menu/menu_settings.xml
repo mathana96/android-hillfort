@@ -3,11 +3,6 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
-    android:id="@+id/item_logout"
-    android:title="@string/button_logout"
-    app:showAsAction="always"/>
-
-  <item
     android:id="@+id/item_cancel"
     android:title="@string/menu_cancelHillfort"
     app:showAsAction="always"/>

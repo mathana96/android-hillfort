@@ -35,7 +35,7 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view), AnkoLogger {
     view?.navigateTo(VIEW.MAPS)
   }
 
-//  fun doSettings() { view?.navigateTo(VIEW.SETTINGS, 0, "current_user", current_user) }
+  fun doSettings() { view?.navigateTo(VIEW.SETTINGS) }
 
   fun doEditHillfort(hillfort: HillfortModel) {
     view?.navigateTo(VIEW.HILLFORT, 0, "hillfort_edit", hillfort)
