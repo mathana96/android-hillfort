@@ -1,6 +1,7 @@
 package org.mathana.hillfort.views.settings
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.*
 import org.mathana.hillfort.views.BasePresenter
@@ -27,6 +28,30 @@ class SettingsPresenter(view: SettingsView): BasePresenter(view), AnkoLogger {
       }
     }
     view?.navigateTo(VIEW.LIST)
+  }
+
+  fun doDeleteAccount() {
+    info ("Saved settings clicked")
+    val db = FirebaseDatabase.getInstance().getReference().child("users")
+    db.child(user!!.uid).removeValue().addOnCompleteListener { task ->
+      if (task.isSuccessful) {
+        user!!.delete().addOnCompleteListener { task ->
+          if (task.isSuccessful) {
+
+            view?.navigateTo(VIEW.LOGIN)
+            view!!.toast("Account Deleted")
+          } else {
+            println("Error Deleting")
+            view!!.toast("Error Deleting")
+          }
+        }
+      } else {
+        println("Error Deleting")
+        view!!.toast("Error Deleting")
+      }
+
+    }
+
   }
 
 

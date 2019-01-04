@@ -15,10 +15,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.delay
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.coroutines.experimental.asReference
 import org.jetbrains.anko.info
 
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import org.mathana.hillfort.R.id.map
 import org.mathana.hillfort.helpers.checkLocationPermissions
 import org.mathana.hillfort.helpers.createDefaultLocationRequest
@@ -120,9 +123,13 @@ class HillfortPresenter(view: HillfortView): BasePresenter(view), AnkoLogger {
     async(UI) {
       if (edit) {
         app.hillforts.update(hillfort)
+        delay(3000)
+
       } else {
         app.hillforts.create(hillfort)
+        delay(3000)
       }
+      info("made it here")
       view?.finish()
     }
   }

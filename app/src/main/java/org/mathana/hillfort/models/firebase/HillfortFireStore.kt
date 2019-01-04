@@ -4,8 +4,10 @@ import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.toast
 import org.mathana.hillfort.models.HillfortModel
 import org.mathana.hillfort.models.HillfortStore
+import org.mathana.hillfort.views.VIEW
 
 class HillfortFireStore(val context: Context) : HillfortStore, AnkoLogger {
 
@@ -22,7 +24,7 @@ class HillfortFireStore(val context: Context) : HillfortStore, AnkoLogger {
     return foundhillfort
   }
 
-  suspend override fun create(hillfort: HillfortModel) {
+  suspend override fun create(hillfort: HillfortModel){
     val key = db.child("users").child(userId).child("hillforts").push().key
     hillfort.fbId = key!!
     hillforts.add(hillfort)
